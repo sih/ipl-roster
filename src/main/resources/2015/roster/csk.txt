@@ -1,0 +1,29 @@
+Batsmen
+3	Suresh Raina	India	27 November 1986 (age 28)	Left-handed	Right-arm off break	2014	INR95 million (US$1.5 million)	Vice-captain
+12	Mithun Manhas	India	12 October 1979 (age 35)	Right-handed	Right-arm off break	2014	INR1 million (US$16,000)	
+13	Faf du Plessis	South Africa	13 July 1984 (age 30)	Right-handed	Right-arm leg break	2014	INR47.5 million (US$750,000)	Overseas
+42	Brendon McCullum	New Zealand	27 September 1981 (age 33)	Right-handed	Right-arm medium	2014	INR32.5 million (US$520,000)	Overseas
+48	Michael Hussey	Australia	27 May 1975 (age 39)	Left-handed	Right-arm medium	2015	INR15 million (US$240,000)	Overseas
+All-rounders
+5	Baba Aparajith	India	8 July 1994 (age 20)	Right-handed	Right-arm off break	2014	INR3 million (US$48,000)	
+8	Ravindra Jadeja	India	6 December 1988 (age 26)	Left-handed	Slow left-arm orthodox	2014	INR75 million (US$1.2 million)	
+47	Dwayne Bravo	Trinidad and Tobago	7 October 1983 (age 31)	Right-handed	Right-arm medium-fast	2014	INR40 million (US$630,000)	Overseas
+50	Dwayne Smith	Barbados	12 April 1983 (age 32)	Right-handed	Right-arm medium-fast	2014	INR45 million (US$710,000)	Overseas
+56	Irfan Pathan	India	27 October 1984 (age 30)	Left-handed	Left-arm medium-fast	2015	INR15 million (US$240,000)	
+68	Andrew Tye	Australia	12 December 1986 (age 28)	Right-handed	Right-arm medium-fast	2015	INR2 million (US$32,000)	Overseas
+Wicket-keepers
+1	Eklavya Dwivedi	India	22 July 1988 (age 26)	Right-handed		2015	INR1 million (US$16,000)	
+7	Mahendra Singh Dhoni	India	7 July 1981 (age 33)	Right-handed	Right-arm medium	2014	INR125 million (US$2.0 million)	Captain
+9	Ankush Bains	India	6 December 1995 (age 19)	Right-handed		2015	INR1 million (US$16,000)	
+Bowlers
+6	Pawan Negi	India	6 January 1993 (age 22)	Left-handed	Slow left-arm orthodox	2014	INR1 million (US$16,000)	
+15	Ishwar Pandey	India	15 August 1989 (age 25)	Right-handed	Right-arm medium-fast	2014	INR15 million (US$240,000)	
+18	Mohit Sharma	India	18 September 1988 (age 26)	Right-handed	Right-arm medium-fast	2014	INR30 million (US$480,000)	
+19	Pratyush Singh	India	4 September 1994 (age 20)	Right-handed	Right-arm leg break googly	2015	INR1 million (US$16,000)	
+21	Matt Henry	New Zealand	14 December 1991 (age 23)	Right-handed	Right-arm fast-medium	2014	INR3 million (US$48,000)	Overseas
+22	Ronit More	India	11 February 1992 (age 23)	Right-handed	Right arm medium-fast	2014	INR1 million (US$16,000)	
+27	Rahul Sharma	India	30 September 1986 (age 28)	Right-handed	Right-arm leg break googly	2015	INR3 million (US$48,000)	
+64	Ashish Nehra	India	30 April 1979 (age 36)	Right-handed	Left-arm medium-fast	2014	INR20 million (US$320,000)	
+77	Samuel Badree	Trinidad and Tobago	9 March 1981 (age 34)	Right-handed	Right-arm leg break	2014	INR3 million (US$48,000)	Overseas
+87	Kyle Abbott	South Africa	18 June 1987 (age 27)	Right-handed	Right-arm fast-medium	2015	INR3 million (US$48,000)	Overseas
+99	Ravichandran Ashwin	India	17 September 1986 (age 28)	Right-handed	Right-arm off break	2014	INR55 million (US$870,000)
