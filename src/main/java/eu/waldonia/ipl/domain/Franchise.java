@@ -2,9 +2,9 @@ package eu.waldonia.ipl.domain;
 
 import java.util.Set;
 
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class Franchise {
@@ -13,7 +13,7 @@ public class Franchise {
 	public String name;
 	public String code;
 	
-	@RelatedTo(type="HOLDS")
+	@Relationship(type="HOLDS", direction = Relationship.OUTGOING)
 	private Set<Contract> contracts;
 	
 }

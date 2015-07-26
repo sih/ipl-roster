@@ -1,21 +1,20 @@
 package eu.waldonia.ipl.domain;
 
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class DOB {
 
 	@GraphId Long id;
 	
-	@RelatedTo(type="DAY")
-	@Fetch private Day day;
+	@Relationship(type="DAY", direction = Relationship.OUTGOING)
+	private Day day;
 	
-	@RelatedTo(type="MONTH")
-	@Fetch private Month month;
+	@Relationship(type="MONTH", direction = Relationship.OUTGOING)
+	private Month month;
 	
-	@RelatedTo(type="YEAR")
-	@Fetch private Year year;
+	@Relationship(type="YEAR", direction = Relationship.OUTGOING)
+	private Year year;
 }

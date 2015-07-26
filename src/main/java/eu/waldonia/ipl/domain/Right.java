@@ -1,6 +1,6 @@
 package eu.waldonia.ipl.domain;
 
-import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
 public class Right extends Handedness {

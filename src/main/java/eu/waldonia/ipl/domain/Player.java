@@ -2,27 +2,25 @@ package eu.waldonia.ipl.domain;
 
 import java.util.Set;
 
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
-import org.springframework.data.neo4j.annotation.RelatedToVia;
-
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 @NodeEntity
 public class Player {
 
 	@GraphId Long id;
 	public String name;
 	
-	@RelatedTo(type="SIGNED")
+	@Relationship(type="SIGNED", direction = Relationship.OUTGOING)
 	private Set<Contract> contracts;
 	
-	@RelatedTo(type="BORN")
+	@Relationship(type="BORN", direction = Relationship.OUTGOING)
 	private DOB dob;
 	
-	@RelatedToVia(type="BOWLS")
+	@Relationship(type="BOWLS", direction = Relationship.OUTGOING)
 	private Handedness arm;
 	
-	@RelatedTo(type="BATS")
+	@Relationship(type="BATS", direction = Relationship.OUTGOING)
 	private Handedness bats;
 	
 }
