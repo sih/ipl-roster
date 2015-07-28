@@ -34,12 +34,30 @@ public class DomainTest extends WrappingServerIntegrationTest{
     @Test
     public void shouldAllowPlayerCreation() {
     	Player bravo = new Player("Dwayne Bravo");
+    	Right rightArm = new Right();
+    	String pace = "Medium-Fast";
+    	String variety = null;
+    	bravo.bowls(rightArm, pace, variety);
+    	
+    	// all empty to begin with
     	Iterable<Player> playaz = playerRepository.findAll();
     	assertFalse(playaz.iterator().hasNext());
+    	
+    	// test save
     	playerRepository.save(bravo);
     	playaz = playerRepository.findAll();
     	assertTrue(playaz.iterator().hasNext());
     	Player db = playaz.iterator().next();
+    	
+    	// test basic
     	assertEquals("Dwayne Bravo", db.name);
+    	// test relationship
+    	Bowls bowls = db.bowls;
+    	assertNotNull(bowls);
+    	assertEquals("Medium-Fast",bowls.pace);
+    	assertNull(bowls.variety);
+    	assertTrue((bowls.arm instanceof Right));
+
+    
     }
 }
