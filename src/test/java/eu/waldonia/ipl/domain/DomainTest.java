@@ -1,6 +1,12 @@
 package eu.waldonia.ipl.domain;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,9 +51,7 @@ public class DomainTest extends WrappingServerIntegrationTest{
     	
     	// test save
     	playerRepository.save(bravo);
-    	playaz = playerRepository.findAll();
-    	assertTrue(playaz.iterator().hasNext());
-    	Player db = playaz.iterator().next();
+    	Player db = playerRepository.findOne(bravo.id);
     	
     	// test basic
     	assertEquals("Dwayne Bravo", db.name);
@@ -57,7 +61,31 @@ public class DomainTest extends WrappingServerIntegrationTest{
     	assertEquals("Medium-Fast",bowls.pace);
     	assertNull(bowls.variety);
     	assertTrue((bowls.arm instanceof Right));
-
-    
     }
+    
+    @Test
+    public void shouldRepresentTernaryContractsRelationship() {
+    	Player bravo = new Player("Dwayne Bravo");
+    	Year y2015 = new Year(2015);
+    	Contract contract = new Contract(y2015,40000000,"INR");
+    	Franchise csk = new Franchise("CSK", "Chennai Super Kings");
+    	bravo.signed(contract, csk, 47);
+    	
+    	playerRepository.save(bravo);
+    	Player db = playerRepository.findOne(bravo.id);
+    	
+    	assertEquals("Dwayne Bravo", db.name);
+    	Set<Signs> contracts = db.signs;
+    	assertEquals(1, contracts.size());
+    	Signs s = contracts.iterator().next();
+    	
+    	assertEquals(new Integer(47),s.shirtNumber);
+    	Contract c = s.contract;
+    	assertNotNull(c);
+    	assertEquals(y2015,c.year);
+    	assertEquals(40000000,c.value);
+    	assertEquals("INR", c.currency);
+    	
+    }
+    
 }
