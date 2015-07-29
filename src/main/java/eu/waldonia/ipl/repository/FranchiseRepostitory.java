@@ -6,4 +6,6 @@ import eu.waldonia.ipl.domain.Franchise;
 
 public interface FranchiseRepostitory extends GraphRepository<Franchise> {
 
+	Franchise findByCode(String code);
+	
 }

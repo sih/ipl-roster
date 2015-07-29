@@ -8,7 +8,7 @@ public class Year {
 
 	@GraphId Long id;
 	
-	private int year;
+	int year;
 	
 	/**
 	 * Default to the current year if none supplied

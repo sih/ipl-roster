@@ -13,13 +13,20 @@ public class Franchise {
 	@GraphId Long id;
 	public String name;
 	public String code;
+
+	/**
+	 * @param code The code of this franchise, e.g. CSK
+	 */
+	public Franchise(String code) {
+		this.code = code;
+	}
 	
 	/**
 	 * @param code The code of this franchise, e.g. CSK
 	 * @param name The name of this franchise, e.g. Chennai Super Kings
 	 */
 	public Franchise(String code, String name) {
-		this.code = code;
+		this(code);
 		this.name = name;
 	}
 	

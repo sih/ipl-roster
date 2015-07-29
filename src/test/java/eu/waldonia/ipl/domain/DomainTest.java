@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import eu.waldonia.ipl.PersistenceContext;
 import eu.waldonia.ipl.repository.FranchiseRepostitory;
 import eu.waldonia.ipl.repository.PlayerRepository;
+import eu.waldonia.ipl.repository.YearRepository;
 
 @ContextConfiguration(classes = {PersistenceContext.class})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,6 +33,9 @@ public class DomainTest extends WrappingServerIntegrationTest{
     
     @Autowired
     FranchiseRepostitory franchiseRepository;
+    
+    @Autowired
+    YearRepository yearRepository;
     
     @Autowired
     Session session;
@@ -105,6 +109,30 @@ public class DomainTest extends WrappingServerIntegrationTest{
     	assertEquals(c.id, fc.id);		// should be the same contract!
     	
     	
+    }
+    
+    @Test
+    public void shouldFindAFranchiseByCode() {
+    	Franchise f = new Franchise("ABC");
+    	franchiseRepository.save(f);
+    	
+    	Franchise dbF = franchiseRepository.findByCode("ABC");
+    	assertNotNull(dbF);
+    	assertEquals(f.code, dbF.code);
+    	assertEquals(f.id, dbF.id);
+    }
+    
+    @Test
+    public void shouldFindYearByYear() {
+    	Year y = new Year(1999);
+    	yearRepository.save(y);
+    	
+    	Year dbY = yearRepository.findYearByYear(1999);
+    	assertNotNull(dbY);
+    	assertEquals(y.year, dbY.year);
+    	assertEquals(y.id, dbY.id);
+    
+    
     }
     
 }
