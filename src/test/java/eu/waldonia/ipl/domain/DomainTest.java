@@ -18,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import eu.waldonia.ipl.PersistenceContext;
+import eu.waldonia.ipl.repository.FranchiseRepostitory;
 import eu.waldonia.ipl.repository.PlayerRepository;
 
 @ContextConfiguration(classes = {PersistenceContext.class})
@@ -28,6 +29,10 @@ public class DomainTest extends WrappingServerIntegrationTest{
 
     @Autowired
     PlayerRepository playerRepository;
+    
+    @Autowired
+    FranchiseRepostitory franchiseRepository;
+    
     @Autowired
     Session session;
     
@@ -72,10 +77,14 @@ public class DomainTest extends WrappingServerIntegrationTest{
     	bravo.signed(contract, csk, 47);
     	
     	playerRepository.save(bravo);
-    	Player db = playerRepository.findOne(bravo.id);
+    	Player dbPlayer = playerRepository.findOne(bravo.id);
     	
-    	assertEquals("Dwayne Bravo", db.name);
-    	Set<Signs> contracts = db.signs;
+    	franchiseRepository.save(csk);
+    	Franchise dbFranchise = franchiseRepository.findOne(csk.id);
+    	
+    	
+    	assertEquals("Dwayne Bravo", dbPlayer.name);
+    	Set<Signs> contracts = dbPlayer.signs;
     	assertEquals(1, contracts.size());
     	Signs s = contracts.iterator().next();
     	
@@ -85,6 +94,16 @@ public class DomainTest extends WrappingServerIntegrationTest{
     	assertEquals(y2015,c.year);
     	assertEquals(40000000,c.value);
     	assertEquals("INR", c.currency);
+    	
+    	// now check the franchise
+    	assertEquals(1, dbFranchise.contracts.size());
+    	Contract fc = dbFranchise.contracts.iterator().next();
+    	assertNotNull(fc);
+    	assertEquals(y2015,fc.year);
+    	assertEquals(40000000,fc.value);
+    	assertEquals("INR", fc.currency);
+    	assertEquals(c.id, fc.id);		// should be the same contract!
+    	
     	
     }
     

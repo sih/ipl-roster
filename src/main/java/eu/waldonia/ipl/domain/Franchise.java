@@ -24,7 +24,7 @@ public class Franchise {
 	}
 	
 	@Relationship(type="HOLDS", direction = Relationship.OUTGOING)
-	private Set<Contract> contracts;
+	public Set<Contract> contracts;
 	
 	public void holds(Contract c) {
 		if (null == contracts) contracts = new HashSet<Contract>();
