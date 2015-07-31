@@ -6,4 +6,10 @@ import org.neo4j.ogm.annotation.NodeEntity;
 public class Day {
 
 	@GraphId Long id;
+	
+	public Day(int day) {
+		this.day = day;
+	}
+	
+	public int day;
 }

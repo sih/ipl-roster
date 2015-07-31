@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
@@ -18,6 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import eu.waldonia.ipl.PersistenceContext;
+import eu.waldonia.ipl.repository.DOBRepository;
 import eu.waldonia.ipl.repository.FranchiseRepostitory;
 import eu.waldonia.ipl.repository.PlayerRepository;
 import eu.waldonia.ipl.repository.YearRepository;
@@ -36,6 +38,9 @@ public class DomainTest extends WrappingServerIntegrationTest{
     
     @Autowired
     YearRepository yearRepository;
+    
+    @Autowired
+    DOBRepository dobRepository;
     
     @Autowired
     Session session;
@@ -133,6 +138,23 @@ public class DomainTest extends WrappingServerIntegrationTest{
     	assertEquals(y.id, dbY.id);
     
     
+    }
+    
+    
+    @Test
+    public void shouldFindBirthdays() {
+    	
+    	DOB dob = new DOB(26,11,1987);
+    	dobRepository.save(dob);
+    	
+    	DOB dbD = dobRepository.findOne(dob.id);
+    	
+    	dbD = dobRepository.getBirthday(26,11,1987);    	
+    	assertNotNull(dbD);
+    	assertEquals(dob,dbD);
+    	
+    	dbD = dobRepository.getBirthday(26,11,1986);    	
+    	assertNull(dbD);
     }
     
 }

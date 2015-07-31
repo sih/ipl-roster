@@ -15,7 +15,7 @@ public class Signs {
 	
 	Long id;
 
-	Integer shirtNumber;
+	public Integer shirtNumber;
 
 	/**
 	 * A player might not have a shirt number (yet). In this case use this constructor

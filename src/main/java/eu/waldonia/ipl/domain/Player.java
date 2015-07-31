@@ -26,10 +26,10 @@ public class Player {
 	public Set<Signs> signs;
 	
 	@Relationship(type="BORN", direction = Relationship.OUTGOING)
-	private DOB dob;
+	public DOB bornOn;
 	
 	@Relationship(type="BATS", direction = Relationship.OUTGOING)
-	private Handedness bats;
+	public Handedness bats;
 
 	@Relationship(type="BOWLS", direction = Relationship.OUTGOING)
 	public Bowls bowls;
@@ -38,6 +38,11 @@ public class Player {
 		Bowls bowls = new Bowls(this, arm, pace, variety);
 		this.bowls = bowls;
 	}
+	
+	public void bats(Handedness h) {
+		this.bats = h;
+	}
+	
 	
 	/**
 	 * @param contract The contract to link to the player and franchise

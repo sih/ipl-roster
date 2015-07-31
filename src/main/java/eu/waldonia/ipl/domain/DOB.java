@@ -9,12 +9,14 @@ public class DOB {
 
 	@GraphId Long id;
 	
-	@Relationship(type="DAY", direction = Relationship.OUTGOING)
-	private Day day;
+	public DOB(int day, int month, int year) {
+		this.day = day;
+		this.month = month;
+		this.year = year; 
+	}
+
+	public int day;
+	public int month;
+	public int year;
 	
-	@Relationship(type="MONTH", direction = Relationship.OUTGOING)
-	private Month month;
-	
-	@Relationship(type="YEAR", direction = Relationship.OUTGOING)
-	private Year year;
 }

@@ -15,13 +15,16 @@ import eu.waldonia.ipl.domain.AllRounder;
 import eu.waldonia.ipl.domain.Batter;
 import eu.waldonia.ipl.domain.Bowler;
 import eu.waldonia.ipl.domain.Contract;
+import eu.waldonia.ipl.domain.DOB;
 import eu.waldonia.ipl.domain.Franchise;
+import eu.waldonia.ipl.domain.Handedness;
 import eu.waldonia.ipl.domain.Left;
 import eu.waldonia.ipl.domain.Player;
 import eu.waldonia.ipl.domain.Right;
 import eu.waldonia.ipl.domain.Signs;
 import eu.waldonia.ipl.domain.WicketKeeper;
 import eu.waldonia.ipl.domain.Year;
+import eu.waldonia.ipl.repository.DOBRepository;
 import eu.waldonia.ipl.repository.FranchiseRepostitory;
 import eu.waldonia.ipl.repository.PlayerRepository;
 
@@ -32,9 +35,9 @@ public class RosterFileProcessor {
 	
 	@Autowired
 	PlayerRepository playerRepository;
-	
-	Left lh = new Left();
-	Right rh = new Right();
+
+	@Autowired
+	DOBRepository dobRepository;
 	
 	static final String SHIRT_NUMBER = "shirtNumber";
 	static final String NAME = "name";
@@ -121,11 +124,33 @@ public class RosterFileProcessor {
 		Map<String,String> attrs = playerAttrs.get(p);
 		p.name = attrs.get(NAME);
 		Integer value = Integer.parseInt(attrs.get(SALARY));
+		// contractual
 		Contract c = new Contract(y, value, attrs.get(CURRENCY));
 		Signs s = new Signs(p,c);
-		f.holds(c);
+		Integer shirtNumber = Integer.parseInt(attrs.get(SHIRT_NUMBER));
+		s.shirtNumber = shirtNumber;
+		f.holds(c);	// don't forget the franchise
+		Handedness h = null;
+		if (attrs.get(HANDED).startsWith("Right")) {
+			h = new Right();
+
+		}
+		else if (attrs.get(HANDED).startsWith("Left")) {
+			h = new Left();
+		}
+		p.bats(h);
 		
-	
+		String birthday = attrs.get(DOB);
+		String[] doblets = birthday.split(" ");
+		Integer day = Integer.parseInt(doblets[0]);
+		Integer month = Integer.parseInt(doblets[1]);
+		Integer year = Integer.parseInt(doblets[2]);
+		
+		DOB dob = dobRepository.getBirthday(day, month, year);
+		if (null == dob) dob = new DOB(day,month,year);
+		
+		p.bornOn = dob;
+		
 		playerRepository.save(p);
 		franchiseRepository.save(f);		
 	}
