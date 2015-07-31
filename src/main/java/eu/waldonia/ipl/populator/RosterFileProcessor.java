@@ -4,7 +4,9 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import eu.waldonia.ipl.domain.AllRounder;
 import eu.waldonia.ipl.domain.Batter;
 import eu.waldonia.ipl.domain.Bowler;
+import eu.waldonia.ipl.domain.Contract;
 import eu.waldonia.ipl.domain.Franchise;
 import eu.waldonia.ipl.domain.Left;
 import eu.waldonia.ipl.domain.Player;
 import eu.waldonia.ipl.domain.Right;
+import eu.waldonia.ipl.domain.Signs;
 import eu.waldonia.ipl.domain.WicketKeeper;
 import eu.waldonia.ipl.domain.Year;
 import eu.waldonia.ipl.repository.FranchiseRepostitory;
@@ -32,8 +36,19 @@ public class RosterFileProcessor {
 	Left lh = new Left();
 	Right rh = new Right();
 	
+	static final String SHIRT_NUMBER = "shirtNumber";
+	static final String NAME = "name";
+	static final String SALARY = "salary";
+	static final String CURRENCY = "currency";
+	static final String BOWL_PACE = "pace";
+	static final String BOWL_VARIETY = "variety";
+	static final String NATIONALITY = "nationality";
+	static final String DOB = "dob";
+	static final String HANDED = "handed";	
 	
 	static final String ROSTER = "roster";
+
+	
 
 	public void process(final URI fileLocation) throws Exception {
 		
@@ -55,8 +70,11 @@ public class RosterFileProcessor {
 	}
 
 	private Year parseYear(String[] directories) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String yyyy = directories[directories.length-3];
+		Integer YYYY = Integer.parseInt(yyyy);
+		
+		return new Year(YYYY);
 	}
 
 	private boolean rosterFile(String[] directories) {
@@ -89,13 +107,33 @@ public class RosterFileProcessor {
 				type = line;
 			}
 			else  {
-				Player p = parseLine(line, type, f, y);
+				Map<Player, Map<String,String>> playerAttrs = parseLine(line, type);
+				populateAndSavePlayer(playerAttrs, y, f);
 			}
 		}
 		
 	}
 	
-	private Player parseLine(String line, String type, Franchise f, Year y) {
+	private void populateAndSavePlayer(Map<Player, Map<String, String>> playerAttrs,
+			Year y, Franchise f) {
+		
+		Player p = playerAttrs.keySet().iterator().next();
+		Map<String,String> attrs = playerAttrs.get(p);
+		p.name = attrs.get(NAME);
+		Integer value = Integer.parseInt(attrs.get(SALARY));
+		Contract c = new Contract(y, value, attrs.get(CURRENCY));
+		Signs s = new Signs(p,c);
+		f.holds(c);
+		
+	
+		playerRepository.save(p);
+		franchiseRepository.save(f);		
+	}
+
+	private Map<Player, Map<String,String>> parseLine(String line, String type) {
+		
+		Map<Player, Map<String,String>> playerAttribtues = new HashMap<Player, Map<String,String>>();
+		
 		Player p = null;
 		if (line != null) {
 			if (type.equals("Batsmen")) {
@@ -110,49 +148,41 @@ public class RosterFileProcessor {
 			else if (type.equals("Bowlers")) {
 				p = new Bowler();
 			}
+			
+			Map<String,String> attrMap = new HashMap<String,String>();
+			playerAttribtues.put(p,attrMap);
+			
 			String[] tokens = line.split("\t");
+			
 			for (int i = 0; i < tokens.length; i++) {
 				switch (i) {
 				case 0:
-					// p.number = Integer.parseInt(tokens[i]);
+					attrMap.put(SHIRT_NUMBER, tokens[i]);
 					break;
 				case 1:
-					p.name = tokens[i];
+					attrMap.put(NAME, tokens[i]);
 					break;
-				// nationality
 				case 2:
-					// p.nationality = tokens[i];
+					attrMap.put(NATIONALITY, tokens[i]);
 					break;
 				// dob
 				case 3:
-					// p.dob = tokens[i];
+					attrMap.put(DOB, tokens[i]);
 					break;
 				// bats
 				case 4:
-					
-					if (tokens[i].equals("Left-handed")) {
-						// p.bats = lh;
-					}
-					else if (tokens[i].equals("Left-handed")) {
-						// p.bats = rh;
-					}
-
+					attrMap.put(HANDED, tokens[i]);
 					break;
 					
 				case 5:
-					
-					String bowling = tokens[i].toLowerCase();	// normalise
-				
-					if (bowling.contains("slow")) {
-						
-					}
-					
+					// TODO
+					break;
 				default:
 					break;
 				}
 			}
 		}
-		return p;
+		return playerAttribtues;
 	}
 	
 	public static void main(String[] args) throws Exception {
