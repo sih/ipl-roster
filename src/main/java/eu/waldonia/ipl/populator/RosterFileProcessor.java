@@ -10,6 +10,10 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import eu.waldonia.ipl.domain.AllRounder;
 import eu.waldonia.ipl.domain.Batter;
@@ -28,6 +32,10 @@ import eu.waldonia.ipl.repository.DOBRepository;
 import eu.waldonia.ipl.repository.FranchiseRepostitory;
 import eu.waldonia.ipl.repository.PlayerRepository;
 
+@Configuration
+@EnableNeo4jRepositories("eu.waldonia.ipl.repository")
+@EnableTransactionManagement
+@ComponentScan("eu.waldonia.ipl")
 public class RosterFileProcessor {
 	
 	@Autowired
@@ -51,6 +59,23 @@ public class RosterFileProcessor {
 	
 	static final String ROSTER = "roster";
 
+	Map<String,Integer> months = new HashMap<String,Integer>(12);
+	
+	public RosterFileProcessor() {
+		months.put("January", 1);
+		months.put("February", 2);
+		months.put("March", 3);
+		months.put("April", 4);
+		months.put("May", 5);
+		months.put("June", 6);
+		months.put("July", 7);
+		months.put("August", 8);
+		months.put("September", 9);
+		months.put("October", 10);
+		months.put("November", 11);
+		months.put("December", 12);
+	}
+	
 	
 
 	public void process(final URI fileLocation) throws Exception {
@@ -89,7 +114,7 @@ public class RosterFileProcessor {
 		Franchise f = null;
 		String filename = directories[directories.length-1];
 		
-		String[] filesplit = filename.split(".");
+		String[] filesplit = filename.split("\\.");
 		String code = filesplit[0].toUpperCase();
 		
 		f = franchiseRepository.findByCode(code);
@@ -126,9 +151,12 @@ public class RosterFileProcessor {
 		Integer value = Integer.parseInt(attrs.get(SALARY));
 		// contractual
 		Contract c = new Contract(y, value, attrs.get(CURRENCY));
-		Signs s = new Signs(p,c);
 		Integer shirtNumber = Integer.parseInt(attrs.get(SHIRT_NUMBER));
-		s.shirtNumber = shirtNumber;
+		
+		p.signed(c, f, shirtNumber);
+		
+		
+		
 		f.holds(c);	// don't forget the franchise
 		Handedness h = null;
 		if (attrs.get(HANDED).startsWith("Right")) {
@@ -143,14 +171,18 @@ public class RosterFileProcessor {
 		String birthday = attrs.get(DOB);
 		String[] doblets = birthday.split(" ");
 		Integer day = Integer.parseInt(doblets[0]);
-		Integer month = Integer.parseInt(doblets[1]);
+		Integer month = months.get(doblets[1]);
 		Integer year = Integer.parseInt(doblets[2]);
 		
 		DOB dob = dobRepository.getBirthday(day, month, year);
-		if (null == dob) dob = new DOB(day,month,year);
+		if (null == dob) {
+			dob = new DOB(day,month,year);
+			dobRepository.save(dob);
+		}
 		
 		p.bornOn = dob;
 		
+
 		playerRepository.save(p);
 		franchiseRepository.save(f);		
 	}
@@ -179,6 +211,8 @@ public class RosterFileProcessor {
 			
 			String[] tokens = line.split("\t");
 			
+			int indexSalary = tokens.length-2;
+			
 			for (int i = 0; i < tokens.length; i++) {
 				switch (i) {
 				case 0:
@@ -202,16 +236,20 @@ public class RosterFileProcessor {
 				case 5:
 					// TODO
 					break;
+					
 				default:
 					break;
 				}
 			}
+			
+			String sal = tokens[indexSalary];
+			String currency = sal.substring(0,3);
+			Integer salary = Integer.parseInt(sal.substring(3, sal.indexOf("million")-1))*1000000;
+			
+			attrMap.put(SALARY, salary.toString());
+			attrMap.put(CURRENCY, currency);
 		}
 		return playerAttribtues;
 	}
 	
-	public static void main(String[] args) throws Exception {
-		RosterFileProcessor rfp = new RosterFileProcessor();
-		rfp.process(new URI("file:///Users/sid/dev/iplpopneo/src/main/resources/2015/roster/csk.txt"));
-	}
 }

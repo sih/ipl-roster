@@ -34,8 +34,11 @@ public class Franchise {
 	public Set<Contract> contracts;
 	
 	public void holds(Contract c) {
-		if (null == contracts) contracts = new HashSet<Contract>();
+		if (null == contracts) {
+			contracts = new HashSet<Contract>();
+		}
 		this.contracts.add(c);
+		c.franchise = this;
 	}
 	
 }

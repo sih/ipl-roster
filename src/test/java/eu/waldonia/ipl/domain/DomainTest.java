@@ -28,11 +28,11 @@ import eu.waldonia.ipl.repository.YearRepository;
 @RunWith(SpringJUnit4ClassRunner.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 
-public class DomainTest extends WrappingServerIntegrationTest{
+public class DomainTest extends WrappingServerIntegrationTest {
 
     @Autowired
     PlayerRepository playerRepository;
-    
+
     @Autowired
     FranchiseRepostitory franchiseRepository;
     
@@ -155,6 +155,19 @@ public class DomainTest extends WrappingServerIntegrationTest{
     	
     	dbD = dobRepository.getBirthday(26,11,1986);    	
     	assertNull(dbD);
+    }
+
+    
+    @Test
+    public void shouldFindPlayersByName() {
+    	Player p = null;
+    	p = playerRepository.findPlayerByName("IVA Richards");
+    	assertNull(p);
+    	Player kv = new Player();
+    	kv.name = "IVA Richards";
+    	playerRepository.save(kv);
+    	p = playerRepository.findPlayerByName("IVA Richards");
+    	assertNotNull(p);
     }
     
 }

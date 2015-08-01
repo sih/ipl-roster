@@ -35,6 +35,6 @@ public class Signs {
 		this.shirtNumber = shirtNumber;
 	}
 	
-	@StartNode Player player;
-	@EndNode Contract contract;
+	@StartNode public Player player;
+	@EndNode public Contract contract;
 }

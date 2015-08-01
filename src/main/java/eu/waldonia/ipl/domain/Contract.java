@@ -9,6 +9,7 @@ public class Contract {
 	@GraphId Long id;
 	public int value;
 	public String currency;
+	public Franchise franchise;
 	
 	public Contract(Year year, int value, String currency) {
 		this.year = year;

@@ -1,11 +1,9 @@
 package eu.waldonia.ipl.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.*;
 
-import org.neo4j.ogm.annotation.GraphId;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.*;
 
 
 @NodeEntity
@@ -23,7 +21,7 @@ public class Player {
 	public String name;
 	
 	@Relationship(type="SIGNED", direction = Relationship.OUTGOING)
-	public Set<Signs> signs;
+	Set<Signs> signs;
 	
 	@Relationship(type="BORN", direction = Relationship.OUTGOING)
 	public DOB bornOn;
@@ -43,6 +41,9 @@ public class Player {
 		this.bats = h;
 	}
 	
+	public Set<Signs> signs() {
+		return signs;
+	}
 	
 	/**
 	 * @param contract The contract to link to the player and franchise
@@ -50,8 +51,17 @@ public class Player {
 	 * @param shirtNumber The shirt number for this player
 	 */
 	public void signed(Contract contract, Franchise franchise, Integer shirtNumber) {
-		if (null == signs) signs = new HashSet<Signs>();
-		signs.add(new Signs(this,contract,shirtNumber));
+		if (null == signs) {
+			this.signs = new HashSet<Signs>();
+		}
+		this.signs.add(new Signs(this,contract,shirtNumber));
 		franchise.holds(contract);
 	}
+	
+	public List<Contract> contracts() {
+		return this.signs.stream()
+			.map(s -> s.contract)
+			.collect(Collectors.toList());
+	}
+	
 }
