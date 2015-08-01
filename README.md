@@ -10,6 +10,11 @@ The roster is sourced from a file per franchise. The file represents the players
 
 The idea of this is so that additional files can be added to the directory structure and additional projects run against the data. An example would be /2015/stats/csk.txt or /2015/stats/dwaynebravo.txt, or even /2015/results/april/08/csk_vs_dd.txt. Ultimately the data itself should be made a project in its own right.
 
+Model
+-----
+
+![Graph data model of roster](https://s3-eu-west-1.amazonaws.com/github-sih/ipl-roster.jpg "Roster Data Model")
+
 Implementation
 --------------
 This uses the neo4j ogm (Object Graph Mapping) libraries and annotations (see https://github.com/neo4j/neo4j-ogm) rather than the Spring Data annotations to bind the domain objects to the underlying database. Spring Data is still used for some of the DDD concepts like repositories, and Spring is used in general for dependency injection.
