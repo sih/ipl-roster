@@ -1,36 +1,17 @@
 package eu.waldonia.ipl.populator;
 
 import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.nio.file.*;
+import java.util.*;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import eu.waldonia.ipl.domain.AllRounder;
-import eu.waldonia.ipl.domain.Batter;
-import eu.waldonia.ipl.domain.Bowler;
-import eu.waldonia.ipl.domain.Contract;
-import eu.waldonia.ipl.domain.DOB;
-import eu.waldonia.ipl.domain.Franchise;
-import eu.waldonia.ipl.domain.Handedness;
-import eu.waldonia.ipl.domain.Left;
-import eu.waldonia.ipl.domain.Player;
-import eu.waldonia.ipl.domain.Right;
-import eu.waldonia.ipl.domain.Signs;
-import eu.waldonia.ipl.domain.WicketKeeper;
-import eu.waldonia.ipl.domain.Year;
-import eu.waldonia.ipl.repository.DOBRepository;
-import eu.waldonia.ipl.repository.FranchiseRepostitory;
-import eu.waldonia.ipl.repository.PlayerRepository;
+import eu.waldonia.ipl.domain.*;
+import eu.waldonia.ipl.repository.*;
 
 @Configuration
 @EnableNeo4jRepositories("eu.waldonia.ipl.repository")
@@ -56,12 +37,22 @@ public class RosterFileProcessor {
 	static final String NATIONALITY = "nationality";
 	static final String DOB = "dob";
 	static final String HANDED = "handed";	
+	static final String ARM = "arm";
+	
+	static final String LEFT = "Left";
+	static final String RIGHT = "Right";
+	
+	
+	
 	
 	static final String ROSTER = "roster";
 
+	
+	
 	Map<String,Integer> months = new HashMap<String,Integer>(12);
 	
 	public RosterFileProcessor() {
+		// no need for Calendars etc. this dataset has a fixed set of month strings
 		months.put("January", 1);
 		months.put("February", 2);
 		months.put("March", 3);
@@ -148,22 +139,21 @@ public class RosterFileProcessor {
 		Player p = playerAttrs.keySet().iterator().next();
 		Map<String,String> attrs = playerAttrs.get(p);
 		p.name = attrs.get(NAME);
+		
+		// contract
 		Integer value = Integer.parseInt(attrs.get(SALARY));
-		// contractual
 		Contract c = new Contract(y, value, attrs.get(CURRENCY));
 		Integer shirtNumber = Integer.parseInt(attrs.get(SHIRT_NUMBER));
-		
 		p.signed(c, f, shirtNumber);
-		
-		
-		
 		f.holds(c);	// don't forget the franchise
+		
+		// bat handed
 		Handedness h = null;
-		if (attrs.get(HANDED).startsWith("Right")) {
+		if (attrs.get(HANDED).startsWith(RIGHT)) {
 			h = new Right();
 
 		}
-		else if (attrs.get(HANDED).startsWith("Left")) {
+		else if (attrs.get(HANDED).startsWith(LEFT)) {
 			h = new Left();
 		}
 		p.bats(h);
@@ -174,15 +164,27 @@ public class RosterFileProcessor {
 		Integer month = months.get(doblets[1]);
 		Integer year = Integer.parseInt(doblets[2]);
 		
+		// DOB
 		DOB dob = dobRepository.getBirthday(day, month, year);
 		if (null == dob) {
 			dob = new DOB(day,month,year);
 			dobRepository.save(dob);
 		}
-		
 		p.bornOn = dob;
 		
-
+		// bowling style
+		Handedness arm = null;
+		if (LEFT.equals(attrs.get(ARM))) {arm = new Left();}
+		else if (RIGHT.equals(attrs.get(ARM))) {arm = new Right();}
+		
+		String pace = attrs.get(BOWL_PACE);
+		String variety = attrs.get(BOWL_VARIETY);
+		
+		// FIXME
+		// p.bowls(arm,pace,variety);
+		
+		// TODO country
+		
 		playerRepository.save(p);
 		franchiseRepository.save(f);		
 	}
@@ -232,9 +234,10 @@ public class RosterFileProcessor {
 				case 4:
 					attrMap.put(HANDED, tokens[i]);
 					break;
-					
+				// bowling
 				case 5:
-					// TODO
+					String bowlDesc = tokens[i].toLowerCase();
+					attrMap = addBowlingDetails(attrMap, bowlDesc);
 					break;
 					
 				default:
@@ -250,6 +253,69 @@ public class RosterFileProcessor {
 			attrMap.put(CURRENCY, currency);
 		}
 		return playerAttribtues;
+	}
+	
+	private Map<String,String> addBowlingDetails(Map<String,String> attrMap, String bowlDesc) {
+		if (bowlDesc.contains("left")) { 
+			attrMap.put(ARM, LEFT); 
+		}
+		else if (bowlDesc.contains("right")) { 
+			attrMap.put(ARM, RIGHT); 
+		}
+		else { 
+			// TOOD log me
+			System.out.println("Can't derive bowling arm from "+bowlDesc);
+		}
+		String variety = null;
+		String pace = null;
+		// variety
+		if (bowlDesc.contains("off")) {
+			variety = Bowls.OFF_BREAK;
+			pace = Bowls.SLOW;
+		}
+		else if (bowlDesc.contains("googly")) {
+			variety = Bowls.LEG_BREAK_GOOGLY;
+			pace = Bowls.SLOW;
+		}
+		else if (bowlDesc.contains("leg")) {
+			variety = Bowls.LEG_BREAK;
+			pace = Bowls.SLOW;
+		}
+		else if (bowlDesc.contains("orthodox")) {
+			variety = Bowls.ORTHODOX;
+		}
+		// pace
+		if (bowlDesc.contains("slow")) {
+			pace = Bowls.SLOW;
+		}
+		else if (bowlDesc.contains("medium-fast")) {
+			pace = Bowls.MEDIUM_FAST;
+		}
+		else if (bowlDesc.contains("medium fast")) {
+			pace = Bowls.MEDIUM_FAST;
+		}
+		else if (bowlDesc.contains("fast-medium")) {
+			pace = Bowls.FAST_MEDIUM;
+		}
+		else if (bowlDesc.contains("fast medium")) {
+			pace = Bowls.FAST_MEDIUM;
+		}
+		else if (bowlDesc.contains("medium")) {
+			pace = Bowls.MEDIUM;
+		}		
+		else if (bowlDesc.contains("fast")) {
+			pace = Bowls.FAST;
+		}
+		
+		if (null == pace) {
+			// TODO log me
+			System.out.println("Couldn't parse pace for "+bowlDesc);
+		}
+		if (null == pace) {
+			// TODO log me
+			System.out.println("Couldn't parse pace for "+bowlDesc);
+		}
+		return attrMap;
 	}
 	
 }

@@ -169,5 +169,46 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	p = playerRepository.findPlayerByName("IVA Richards");
     	assertNotNull(p);
     }
+
+    @Test
+    public void shouldSupportBowlsRelationship() {
+    	Player p = new Player();
+    	p.name = "Michael Holding";
+    	Handedness rightArm = new Right();
+    	String pace = Bowls.FAST;
+    	String variety = null;
+    	p.bowls(rightArm,pace,variety);
+    	
+    	playerRepository.save(p);
+    	
+    	Player dbp = playerRepository.findPlayerByName("Michael Holding");
+    	assertNotNull(dbp);
+    	Bowls b = dbp.bowls;
+    	assertNull(b.variety);
+		assertEquals(Bowls.FAST, b.pace);
+		assertTrue(b.arm() instanceof Right);
+    }
+    
+    @Test
+    public void shouldSupportBatsAndBowlsRelationship() {
+    	Player p = new Player();
+    	p.name = "Michael Holding";
+    	Handedness rightArm = new Right();
+    	String pace = Bowls.FAST;
+    	String variety = null;
+    	p.bowls(rightArm,pace,variety);
+    	
+    	Handedness rightHand = new Right();
+    	p.bats(rightHand);
+    	
+    	playerRepository.save(p);
+    	
+    	Player dbp = playerRepository.findPlayerByName("Michael Holding");
+    	assertNotNull(dbp);
+    	Bowls b = dbp.bowls;
+    	assertNull(b.variety);
+		assertEquals(Bowls.FAST, b.pace);
+		assertTrue(b.arm() instanceof Right);    	
+    }
     
 }
