@@ -180,8 +180,7 @@ public class RosterFileProcessor {
 		String pace = attrs.get(BOWL_PACE);
 		String variety = attrs.get(BOWL_VARIETY);
 		
-		// FIXME
-		// p.bowls(arm,pace,variety);
+		p.bowls(arm,pace,variety);
 		
 		// TODO country
 		
@@ -315,6 +314,9 @@ public class RosterFileProcessor {
 			// TODO log me
 			System.out.println("Couldn't parse pace for "+bowlDesc);
 		}
+		attrMap.put(BOWL_PACE, pace);
+		attrMap.put(BOWL_VARIETY, variety);
+		
 		return attrMap;
 	}
 	

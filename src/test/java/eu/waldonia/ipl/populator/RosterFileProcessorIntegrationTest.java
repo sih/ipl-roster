@@ -88,13 +88,11 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 			assertEquals(contract, fContract);
 			
 			// check bowl style
-			/*
 			Bowls b = p.bowls;
 			assertNotNull(b);
 			assertEquals(Bowls.OFF_BREAK, b.variety);
 			assertEquals(Bowls.SLOW, b.pace);
 			assertTrue(b.arm() instanceof Right);
-			*/
 		} 
 		catch (Exception e) {
 			fail("Shouldn't have thrown exception "+e.getMessage());
