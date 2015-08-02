@@ -180,7 +180,10 @@ public class RosterFileProcessor {
 		String pace = attrs.get(BOWL_PACE);
 		String variety = attrs.get(BOWL_VARIETY);
 		
-		p.bowls(arm,pace,variety);
+		if (arm != null) {
+			p.bowls(arm,pace,variety);			
+		}
+
 		
 		// TODO country
 		

@@ -47,16 +47,25 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
     }
     
 	@Test
-	public void shouldCreatePlayerFromCSK() {
+	public void shouldProcessCSKFile() {
 		try {
-			Player p = null;
-			// batter
+			Player p = null;			
 			p = playerRepository.findPlayerByName("Suresh Raina");
+			// batter
 			assertNull(p);
 			// run in the file
 			rfp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster/csk.txt"));
 			// check batter
 			p = playerRepository.findPlayerByName("Suresh Raina");
+			
+			/*
+			 * Note there is a bug in Spring Data Neo4j 4.0.0.M1
+			 * "Upgrading" to 4.0.0.BUILD-SNAPSHOT causes other issues with dependencies and when
+			 * those are resolved with the fact that WrappingServerIntegrationTest no longer exists.
+			 * TODO Find the fix in the latest release and incorporate in to a forked copy
+			 * http://stackoverflow.com/questions/30465012/spring-data-neo4j-findbynamestring-name-in-interface-returns-incorrect-results
+			 */
+			
 			assertNotNull(p);
 			assertTrue(p instanceof Batter);
 			Handedness h = p.bats;

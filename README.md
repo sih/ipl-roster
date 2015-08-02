@@ -1,4 +1,4 @@
-# ipl-roster
+# Indian Premier League (IPL) Roster
 
 Overview
 --------
