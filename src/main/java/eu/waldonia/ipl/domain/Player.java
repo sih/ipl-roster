@@ -31,6 +31,18 @@ public class Player {
 
 	@Relationship(type="BOWLS", direction = Relationship.OUTGOING)
 	public Bowls bowls;
+
+	@Relationship(type="REPRESENTS", direction = Relationship.OUTGOING)
+	private Country country;
+	
+	
+	public Country country() {
+		return country;
+	}
+	
+	public void country(Country country) {
+		this.country = country;
+	}
 	
 	public void bowls(Handedness arm, String pace, String variety) {
 		Bowls bowls = new Bowls(this, arm, pace, variety);
