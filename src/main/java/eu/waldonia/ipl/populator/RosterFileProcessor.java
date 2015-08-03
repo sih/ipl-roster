@@ -27,6 +27,10 @@ public class RosterFileProcessor {
 
 	@Autowired
 	DOBRepository dobRepository;
+
+    @Autowired
+    CountryRepository countryRepository;
+
 	
 	static final String SHIRT_NUMBER = "shirtNumber";
 	static final String NAME = "name";
@@ -34,7 +38,7 @@ public class RosterFileProcessor {
 	static final String CURRENCY = "currency";
 	static final String BOWL_PACE = "pace";
 	static final String BOWL_VARIETY = "variety";
-	static final String NATIONALITY = "nationality";
+	static final String COUNTRY = "country";
 	static final String DOB = "dob";
 	static final String HANDED = "handed";	
 	static final String ARM = "arm";
@@ -147,6 +151,15 @@ public class RosterFileProcessor {
 		p.signed(c, f, shirtNumber);
 		f.holds(c);	// don't forget the franchise
 		
+		// country
+		Country ctry = null;
+		String countryName = attrs.get(COUNTRY);
+		ctry = countryRepository.findCountryByName(countryName);
+		if (null == ctry) {
+			ctry = new Country(countryName);
+		}
+		p.country(ctry);
+		
 		// bat handed
 		Handedness h = null;
 		if (attrs.get(HANDED).startsWith(RIGHT)) {
@@ -226,7 +239,7 @@ public class RosterFileProcessor {
 					attrMap.put(NAME, tokens[i]);
 					break;
 				case 2:
-					attrMap.put(NATIONALITY, tokens[i]);
+					attrMap.put(COUNTRY, tokens[i]);
 					break;
 				// dob
 				case 3:

@@ -37,6 +37,9 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
     
     @Autowired
     YearRepository yearRepository;
+
+    @Autowired
+    CountryRepository countryRepository;
     
     @Autowired
     Session session;
@@ -71,6 +74,12 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 			Handedness h = p.bats;
 			assertTrue(h instanceof Left);
 			assertEquals("Suresh Raina", p.name);
+			
+			// country
+			
+			Country india = countryRepository.findCountryByName("India");
+			assertNotNull(india);
+			assertEquals(india, p.country());
 			
 			DOB dbDOB = dobRepository.getBirthday(27, 11, 1986);
 			assertEquals(dbDOB, p.bornOn);

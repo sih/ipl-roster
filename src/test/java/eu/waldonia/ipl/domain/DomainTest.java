@@ -19,10 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import eu.waldonia.ipl.PersistenceContext;
-import eu.waldonia.ipl.repository.DOBRepository;
-import eu.waldonia.ipl.repository.FranchiseRepostitory;
-import eu.waldonia.ipl.repository.PlayerRepository;
-import eu.waldonia.ipl.repository.YearRepository;
+import eu.waldonia.ipl.repository.*;
 
 @ContextConfiguration(classes = {PersistenceContext.class})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -41,6 +38,9 @@ public class DomainTest extends WrappingServerIntegrationTest {
     
     @Autowired
     DOBRepository dobRepository;
+    
+    @Autowired
+    CountryRepository countryRepository;
     
     @Autowired
     Session session;
@@ -235,6 +235,16 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	assertNotNull(dbp.country());
     	assertEquals("Jamaica", dbp.country().name());
     	
+    }
+    
+    @Test
+    public void shouldFindCountryByName() {
+    	Country c= new Country("Guyana");
+    	countryRepository.save(c);
+
+    	Country dbC = countryRepository.findCountryByName("Guyana");
+    	assertNotNull(dbC);
+    	assertEquals(c.id, dbC.id);
     }
     
 }
