@@ -5,6 +5,7 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.stream.Stream;
 
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
@@ -46,11 +47,9 @@ public class RosterFileProcessor {
 	static final String LEFT = "Left";
 	static final String RIGHT = "Right";
 	
-	
-	
-	
 	static final String ROSTER = "roster";
 
+	static Logger logger;
 	
 	
 	Map<String,Integer> months = new HashMap<String,Integer>(12);
@@ -69,6 +68,8 @@ public class RosterFileProcessor {
 		months.put("October", 10);
 		months.put("November", 11);
 		months.put("December", 12);
+		
+		logger = LoggerFactory.getLogger(RosterFileProcessor.class);
 	}
 	
 	
@@ -323,12 +324,10 @@ public class RosterFileProcessor {
 		}
 		
 		if (null == pace) {
-			// TODO log me
-			System.out.println("Couldn't parse pace for "+bowlDesc);
+			logger.warn("Couldn't parse pace for "+bowlDesc);
 		}
 		if (null == pace) {
-			// TODO log me
-			System.out.println("Couldn't parse pace for "+bowlDesc);
+			logger.warn("Couldn't parse pace for "+bowlDesc);
 		}
 		attrMap.put(BOWL_PACE, pace);
 		attrMap.put(BOWL_VARIETY, variety);
