@@ -33,7 +33,7 @@ public class Contract {
 	}
 	
 	public int value() {
-		return value();
+		return value;
 	}
 	
 	public Year year() {

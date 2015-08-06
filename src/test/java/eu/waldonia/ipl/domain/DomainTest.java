@@ -166,33 +166,6 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	assertNotNull(p);
     }
 
-    /**
-     * Test for issue in spring-data-neo4j 4.0.0.M1
-     * https://github.com/sih/ipl-roster/issues/8
-     */
-    @Test
-    public void shouldFindPlayersByNameMulti() {
-    	Player p = null;
-    	Player kv = new Player();
-    	kv.name = "IVA Richards";
-    	playerRepository.save(kv);
-    	p = playerRepository.findPlayerByName("IVA Richards");
-    	assertNotNull(p);
-    	assertEquals("IVA Richards", p.name);
-    	// multi
-    	Player mh = new Player();
-    	mh.name = "Michael Holding";
-    	playerRepository.save(mh);
-    	try {
-        	p = playerRepository.findPlayerByName("IVA Richards");
-        	assertNotNull(p);
-        	assertEquals("IVA Richards", p.name);
-    	}
-    	catch (Exception e) {
-    		fail("Shouldn't have thrown an exception "+e.getMessage());
-    	}
-
-    }
     
     @Test
     public void shouldSupportBowlsRelationship() {
