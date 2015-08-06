@@ -15,7 +15,7 @@ public class Signs {
 	
 	Long id;
 
-	public Integer shirtNumber;
+	private Integer shirtNumber;
 
 	/**
 	 * A player might not have a shirt number (yet). In this case use this constructor
@@ -35,6 +35,19 @@ public class Signs {
 		this.shirtNumber = shirtNumber;
 	}
 	
-	@StartNode public Player player;
-	@EndNode public Contract contract;
+	@StartNode private Player player;
+	@EndNode private Contract contract;
+	
+	public void contract(Contract c) {
+		this.contract = c;
+	}
+	
+	public Contract contract() {
+		return contract;
+	}
+
+	public Integer shirtNumber() {
+		return shirtNumber;
+	}
+	
 }

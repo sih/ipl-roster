@@ -1,10 +1,6 @@
 package eu.waldonia.ipl.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 import java.util.Set;
@@ -97,20 +93,20 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	assertEquals(1, contracts.size());
     	Signs s = contracts.iterator().next();
     	
-    	assertEquals(new Integer(47),s.shirtNumber);
-    	Contract c = s.contract;
+    	assertEquals(new Integer(47),s.shirtNumber());
+    	Contract c = s.contract();
     	assertNotNull(c);
-    	assertEquals(y2015,c.year);
-    	assertEquals(40000000,c.value);
-    	assertEquals("INR", c.currency);
+    	assertEquals(y2015,c.year());
+    	assertEquals(40000000,c.value());
+    	assertEquals("INR", c.currency());
     	
     	// now check the franchise
     	assertEquals(1, dbFranchise.contracts.size());
     	Contract fc = dbFranchise.contracts.iterator().next();
     	assertNotNull(fc);
-    	assertEquals(y2015,fc.year);
-    	assertEquals(40000000,fc.value);
-    	assertEquals("INR", fc.currency);
+    	assertEquals(y2015,fc.year());
+    	assertEquals(40000000,fc.value());
+    	assertEquals("INR", fc.currency());
     	assertEquals(c.id, fc.id);		// should be the same contract!
     	
     	
@@ -123,7 +119,7 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	
     	Franchise dbF = franchiseRepository.findByCode("ABC");
     	assertNotNull(dbF);
-    	assertEquals(f.code, dbF.code);
+    	assertEquals(f.code(), dbF.code());
     	assertEquals(f.id, dbF.id);
     }
     
@@ -169,7 +165,34 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	p = playerRepository.findPlayerByName("IVA Richards");
     	assertNotNull(p);
     }
-    
+
+    /**
+     * Test for issue in spring-data-neo4j 4.0.0.M1
+     * https://github.com/sih/ipl-roster/issues/8
+     */
+    @Test
+    public void shouldFindPlayersByNameMulti() {
+    	Player p = null;
+    	Player kv = new Player();
+    	kv.name = "IVA Richards";
+    	playerRepository.save(kv);
+    	p = playerRepository.findPlayerByName("IVA Richards");
+    	assertNotNull(p);
+    	assertEquals("IVA Richards", p.name);
+    	// multi
+    	Player mh = new Player();
+    	mh.name = "Michael Holding";
+    	playerRepository.save(mh);
+    	try {
+        	p = playerRepository.findPlayerByName("IVA Richards");
+        	assertNotNull(p);
+        	assertEquals("IVA Richards", p.name);
+    	}
+    	catch (Exception e) {
+    		fail("Shouldn't have thrown an exception "+e.getMessage());
+    	}
+
+    }
     
     @Test
     public void shouldSupportBowlsRelationship() {

@@ -72,7 +72,7 @@ public class Player {
 	
 	public List<Contract> contracts() {
 		return this.signs.stream()
-			.map(s -> s.contract)
+			.map(s -> s.contract())
 			.collect(Collectors.toList());
 	}
 	

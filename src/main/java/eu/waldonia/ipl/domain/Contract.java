@@ -7,9 +7,9 @@ import org.neo4j.ogm.annotation.Relationship;
 @NodeEntity
 public class Contract {
 	@GraphId Long id;
-	public int value;
-	public String currency;
-	public Franchise franchise;
+	private int value;
+	private String currency;
+	private Franchise franchise;
 	
 	public Contract(Year year, int value, String currency) {
 		this.year = year;
@@ -18,5 +18,29 @@ public class Contract {
 	}
 	
 	@Relationship(type = "DATED", direction = Relationship.OUTGOING)
-	public Year year;
+	private Year year;
+	
+	public void franchise(Franchise f) {
+		this.franchise = f;
+	}
+	
+	public Franchise franchise() {
+		return franchise;
+	}
+	
+	public void value(int v) {
+		this.value = v;
+	}
+	
+	public int value() {
+		return value();
+	}
+	
+	public Year year() {
+		return year;
+	}
+	
+	public String currency() {
+		return currency;
+	}
 }

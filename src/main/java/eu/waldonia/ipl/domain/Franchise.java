@@ -11,8 +11,8 @@ import org.neo4j.ogm.annotation.Relationship;
 public class Franchise {
 
 	@GraphId Long id;
-	public String name;
-	public String code;
+	private String name;
+	private String code;
 
 	/**
 	 * @param code The code of this franchise, e.g. CSK
@@ -38,7 +38,13 @@ public class Franchise {
 			contracts = new HashSet<Contract>();
 		}
 		this.contracts.add(c);
-		c.franchise = this;
+		c.franchise(this);
 	}
+	
+	public String code() {
+		return code;
+	}
+
+	
 	
 }
