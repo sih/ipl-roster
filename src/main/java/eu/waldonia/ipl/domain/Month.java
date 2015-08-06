@@ -10,7 +10,7 @@ public class Month {
 		this.month = month;
 	}
 	
-	public int month;
+	private int month;
 
 	@GraphId Long id;
 }

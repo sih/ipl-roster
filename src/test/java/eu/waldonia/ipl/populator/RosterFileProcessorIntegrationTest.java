@@ -89,18 +89,18 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 			
 			List<Contract> contracts = p.contracts();
 			Contract contract = (Contract) contracts.stream()
-				.filter(s -> s.franchise.equals(csk))
+				.filter(s -> s.franchise().equals(csk))
 				.toArray()[0];
 			
 			// check the contract
 			assertNotNull(contract);
-			assertEquals(95000000,contract.value);
-			assertEquals("INR", contract.currency);
-			assertEquals(y2015, contract.year);
+			assertEquals(95000000,contract.value());
+			assertEquals("INR", contract.currency());
+			assertEquals(y2015, contract.year());
 			
 			// check the contract from the franchise pov
 			Contract fContract = (Contract)csk.contracts.stream()
-			.filter(s -> s.franchise.equals(csk))
+			.filter(s -> s.franchise().equals(csk))
 			.toArray()[0];
 			
 			assertEquals(contract, fContract);

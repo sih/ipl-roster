@@ -11,5 +11,6 @@ public class Day {
 		this.day = day;
 	}
 	
-	public int day;
+	private int day;
+	
 }
