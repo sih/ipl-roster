@@ -13,7 +13,7 @@
 		<spring.version>4.1.4.RELEASE</spring.version>
 		<spring.security.version>4.0.0.RC1</spring.security.version>
 		<neo4j.version>2.1.7</neo4j.version>
-		<sdn.version>4.0.0.M1</sdn.version>
+		<sdn.version>4.0.0.M1-ISSUE8</sdn.version>
 	</properties>
 
 	<dependencies>
