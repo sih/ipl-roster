@@ -61,7 +61,7 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	
     	// test save
     	playerRepository.save(bravo);
-    	Player db = playerRepository.findOne(bravo.id);
+    	Player db = playerRepository.findOne(bravo.id());
     	
     	// test basic
     	assertEquals("Dwayne Bravo", db.name);
@@ -82,7 +82,7 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	bravo.signed(contract, csk, 47);
     	
     	playerRepository.save(bravo);
-    	Player dbPlayer = playerRepository.findOne(bravo.id);
+    	Player dbPlayer = playerRepository.findOne(bravo.id());
     	
     	franchiseRepository.save(csk);
     	Franchise dbFranchise = franchiseRepository.findOne(csk.id);

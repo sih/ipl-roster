@@ -17,7 +17,7 @@ public class Player {
 		this.name = name;
 	}
 
-	@GraphId Long id;
+	@GraphId private Long id;
 	public String name;
 	
 	@Relationship(type="SIGNED", direction = Relationship.OUTGOING)
@@ -74,6 +74,10 @@ public class Player {
 		return this.signs.stream()
 			.map(s -> s.contract())
 			.collect(Collectors.toList());
+	}
+
+	public Long id() {
+		return id;
 	}
 	
 }
