@@ -2,9 +2,7 @@ package eu.waldonia.ipl;
 
 import org.neo4j.ogm.session.Session;
 import org.neo4j.ogm.session.SessionFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.server.Neo4jServer;
@@ -15,6 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableNeo4jRepositories("eu.waldonia.ipl.repository")
 @EnableTransactionManagement
 @ComponentScan("eu.waldonia.ipl")
+@EnableAspectJAutoProxy
 public class PersistenceContext extends Neo4jConfiguration {
 
     public static final int NEO4J_PORT = 7479;
