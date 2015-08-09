@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableNeo4jRepositories("eu.waldonia.ipl.repository")
-@EnableTransactionManagement
 @ComponentScan("eu.waldonia.ipl")
+@EnableTransactionManagement
 @EnableAspectJAutoProxy
 public class PersistenceContext extends Neo4jConfiguration {
 

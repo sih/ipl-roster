@@ -46,6 +46,18 @@ public class DomainTest extends WrappingServerIntegrationTest {
     protected int neoServerPort() {
         return PersistenceContext.NEO4J_PORT;
     }
+    
+    @Test
+    public void shouldSave() {
+    	Player bravo = new Player("Dwayne Bravo");
+    	Right rightArm = new Right();
+    	String pace = "Medium-Fast";
+    	String variety = null;
+    	bravo.bowls(rightArm, pace, variety);
+    	
+    	// test save
+    	playerRepository.save(bravo);
+    }
 
     @Test
     public void shouldAllowPlayerCreation() {
