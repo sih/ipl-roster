@@ -26,7 +26,7 @@ public class TransactionWatcher {
 	@After("execution(* org.springframework.data.neo4j.transaction.Neo4jTransactionManager.commit(..))")
 	public void springCommit() throws Throwable {
 		if (itemToBeSaved != null) {
-			logger.info("Just committed item of class "+itemToBeSaved.getClass()+" and id ");			
+			logger.info("COMMIT: Just committed item of class "+itemToBeSaved.getClass()+" and id ");			
 		}
 		itemToBeSaved = null;
 	}
