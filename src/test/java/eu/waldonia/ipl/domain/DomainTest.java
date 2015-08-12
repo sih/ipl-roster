@@ -89,7 +89,7 @@ public class DomainTest extends WrappingServerIntegrationTest {
     public void shouldRepresentTernaryContractsRelationship() {
     	Player bravo = new Player("Dwayne Bravo");
     	Year y2015 = new Year(2015);
-    	Contract contract = new Contract(y2015,40000000,"INR");
+    	Contract contract = new Contract(y2015,40000000,"INR",bravo);
     	Franchise csk = new Franchise("CSK", "Chennai Super Kings");
     	bravo.signed(contract, csk, 47);
     	

@@ -10,11 +10,13 @@ public class Contract {
 	private int value;
 	private String currency;
 	private Franchise franchise;
+	private Player player;
 	
-	public Contract(Year year, int value, String currency) {
+	public Contract(Year year, int value, String currency, Player p) {
 		this.year = year;
 		this.value = value;
 		this.currency = currency;
+		this.player = p;
 	}
 	
 	@Relationship(type = "DATED", direction = Relationship.OUTGOING)
@@ -42,5 +44,9 @@ public class Contract {
 	
 	public String currency() {
 		return currency;
+	}
+	
+	public Player player() {
+		return player;
 	}
 }

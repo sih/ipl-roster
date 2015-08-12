@@ -100,7 +100,7 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 			
 			// check the contract from the franchise pov
 			Contract fContract = (Contract)csk.contracts.stream()
-			.filter(s -> s.franchise().equals(csk))
+			.filter(s -> s.franchise().equals(csk) && s.player().name.equals("Suresh Raina"))
 			.toArray()[0];
 			
 			assertEquals(contract, fContract);

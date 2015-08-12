@@ -50,4 +50,8 @@ public class Signs {
 		return shirtNumber;
 	}
 	
+	public Player player() {
+		return player;
+	}
+	
 }
