@@ -1,0 +1,24 @@
+Batsmen
+2	George Bailey	Australia	7 September 1982 (age 32)	Right-handed	Right-arm medium	2014	INR32.5 million (US$510,000)	Overseas/Captain
+8	Murali Vijay	India	1 April 1984 (age 31)	Right-handed	Right-arm off break	2015	INR30 million (US$470,000)	
+10	David Miller	South Africa	10 June 1989 (age 26)	Left-handed	Right-arm off break	2014	INR125 million (US$2.0 million)	Overseas
+14	Shaun Marsh	Australia	9 July 1983 (age 32)	Left-handed	Slow left-arm orthodox	2014	INR22 million (US$350,000)	Overseas
+18	Virender Sehwag	India	20 October 1978 (age 36)	Right-handed	Right-arm off break	2014	INR32 million (US$500,000)	
+29	Gurkeerat Singh	India	29 June 1990 (age 25)	Right-handed	Right-arm off break	2014	INR13 million (US$200,000)	Occasional wicket-keeper
+54	Manan Vohra	India	18 July 1993 (age 21)	Right-handed	Right-arm medium	2014	INR40 million (US$630,000)	
+All-rounders
+1	Thisara Perera	Sri Lanka	3 April 1989 (age 26)	Left-handed	Right-arm medium-fast	2014	INR16 million (US$250,000)	Overseas
+19	Rishi Dhawan	India	19 February 1990 (age 25)	Right-handed	Right-arm medium-fast	2014	INR30 million (US$470,000)	
+20	Axar Patel	India	20 January 1994 (age 21)	Left-handed	Slow left-arm orthodox	2014	INR7.5 million (US$120,000)	
+32	Glenn Maxwell	Australia	14 October 1988 (age 26)	Right-handed	Right-arm off break	2014	INR60 million (US$940,000)	Overseas
+45	Shivam Sharma	India	9 September 1993 (age 21)	Right-handed	Right-arm off-break	2014	INR1 million (US$16,000)	
+Wicket-keepers
+6	Wriddhiman Saha	India	24 October 1984 (age 30)	Right-handed		2014	INR22 million (US$350,000)	
+Bowlers
+22	Karanveer Singh	India	8 November 1987 (age 27)	Right-handed	Leg break googly	2014	INR1 million (US$16,000)	
+23	Beuran Hendricks	South Africa	8 June 1990 (age 25)	Right-handed	Left-arm medium-fast	2014	INR18 million (US$280,000)	Overseas
+25	Mitchell Johnson	Australia	2 November 1981 (age 33)	Left-handed	Left-arm fast	2014	INR65 million (US$1.0 million)	Overseas
+28	Shardul Thakur	India	16 October 1991 (age 23)	Right-handed	Right-arm medium-fast	2014	INR2 million (US$31,000)	
+33	Anureet Singh	India	2 March 1988 (age 27)	Right-handed	Right-arm medium-fast	2014	INR2 million (US$31,000)	
+34	Parvinder Awana	India	19 June 1986 (age 29)	Right-handed	Right-arm medium-fast	2014	INR6.5 million (US$100,000)	
+66	Sandeep Sharma	India	18 May 1993 (age 22)	Right-handed	Right-arm medium-fast	2014	INR8.5 million (US$130,000)

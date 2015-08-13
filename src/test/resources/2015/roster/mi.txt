@@ -1,0 +1,26 @@
+Batsmen
+5	Aaron Finch[a]	Australia	17 November 1986 (age 28)	Right-handed	Left-arm off break	2015	INR32 million (US$500,000)	Overseas
+7	Siddhesh Lad	India	23 May 1992 (age 23)	Right-handed	Right arm off break	2015	INR1 million (US$16,000)	
+9	Ambati Rayudu	India	23 September 1985 (age 29)	Right-handed	Right-arm off break	2014	INR40 million (US$630,000)	Occasional wicket-keeper
+15	Unmukt Chand	India	26 March 1993 (age 22)	Right-handed	Right arm off break	2015	Traded player	
+45	Rohit Sharma	India	30 April 1987 (age 28)	Right-handed	Right-arm off break	2014	INR125 million (US$2.0 million)	Captain
+54	Lendl Simmons	Trinidad and Tobago	25 January 1985 (age 30)	Right-handed	Right-arm medium	2014	INR9 million (US$140,000)	Overseas
+All-rounders
+19	Shreyas Gopal	India	4 September 1993 (age 21)	Right-handed	Right-arm leg break	2014	INR1 million (US$16,000)	
+55	Kieron Pollard	Trinidad and Tobago	12 May 1987 (age 28)	Right-handed	Right-arm medium-fast	2014	INR75 million (US$1.2 million)	Overseas/Vice-captain
+78	Corey Anderson[b]	New Zealand	13 December 1990 (age 24)	Left-handed	Left-arm medium-fast	2014	INR45 million (US$710,000)	Overseas
+228	Hardik Pandya	India	11 October 1993 (age 21)	Right-handed	Right-arm medium-fast	2015	INR1 million (US$16,000)	
+Wicket-keepers
+27	Aditya Tare	India	7 November 1987 (age 27)	Right-handed		2014	INR16 million (US$250,000)	
+72	Parthiv Patel	India	9 March 1985 (age 30)	Left-handed		2015	Traded player	
+Bowlers
+3	Harbhajan Singh	India	3 July 1980 (age 35)	Right-handed	Right-arm off break	2014	INR95 million (US$1.5 million)	
+8	Josh Hazlewood[c]	Australia	8 January 1991 (age 24)	Left-handed	Right-arm fast-medium	2014	INR5 million (US$79,000)	Overseas
+12	Jasprit Bumrah	India	6 December 1993 (age 21)	Right-handed	Right-arm medium-fast	2014	INR12 million (US$190,000)	
+16	Jagadeesha Suchith	India	16 January 1994 (age 21)	Left-handed	Slow left-arm orthodox	2015	INR1 million (US$16,000)	
+23	Vinay Kumar	India	12 February 1984 (age 31)	Right-handed	Right-arm medium-fast	2015	Traded player	
+30	Pragyan Ojha	India	9 March 1985 (age 30)	Left-handed	Slow left-arm orthodox	2015	INR5 million (US$79,000)	
+33	Pawan Suyal	India	15 October 1989 (age 25)	Right-handed	Left-arm medium-fast	2014	INR1 million (US$16,000)	
+81	Mitchell McClenaghan	New Zealand	11 June 1986 (age 29)	Left-handed	Left-arm fast-medium	2015	INR3 million (US$47,000)	Overseas
+90	Marchant de Lange	South Africa	13 October 1990 (age 24)	Right-handed	Right-arm fast	2014	INR3 million (US$47,000)	Overseas
+99	Lasith Malinga	Sri Lanka	28 August 1983 (age 31)	Right-handed	Right-arm fast	2014	INR55 million (US$870,000)	Overseas

@@ -1,5 +1,6 @@
 package eu.waldonia.ipl.populator;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.nio.file.*;
@@ -74,17 +75,17 @@ public class RosterFileProcessor {
 
 	public Map<String,String> process(final URI fileLocation) throws Exception {
 
-		Path p = Paths.get(fileLocation).toAbsolutePath();
-		String[] directories = p.toString().split("/");
-
+		Path p = Paths.get(fileLocation);
+		
+		String[] directories = p.toString().split(File.separator);
+		
 		// check we're processing a roster file
 		if (!rosterFile(directories)) {
 			throw new IllegalArgumentException(
 					"Wrong file supplied " + p.toString());
 		}
-
-		Franchise f = parseFranchise(directories); // grab franchise from
-													// filename
+		Franchise f = parseFranchise(p.getFileName().toString()); // grab franchise from
+																// filename
 		Year y = parseYear(directories); // grab year from path
 
 		Stream<String> lines = Files.lines(Paths.get(fileLocation));
@@ -107,10 +108,9 @@ public class RosterFileProcessor {
 		return ROSTER.equalsIgnoreCase(directories[directories.length - 2]);
 	}
 
-	private Franchise parseFranchise(String[] directories) {
-		Franchise f = null;
-		String filename = directories[directories.length - 1];
 
+	private Franchise parseFranchise(String filename) {
+		Franchise f = null;
 		String[] filesplit = filename.split("\\.");
 		String code = filesplit[0].toUpperCase();
 

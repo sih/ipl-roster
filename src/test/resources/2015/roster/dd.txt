@@ -1,0 +1,25 @@
+Batsmen
+5	Manoj Tiwary	India	14 November 1985 (age 29)	Right-handed	Right-arm leg break	2014	INR28 million (US$440,000)	
+14	Mayank Agarwal	India	16 February 1991 (age 24)	Right-handed		2014	INR16 million (US$250,000)	
+15	Saurabh Tiwary	India	30 December 1989 (age 25)	Left-handed	Right-arm off break	2014	INR7 million (US$110,000)	
+18	Kedar Jadhav	India	26 March 1985 (age 30)	Right-handed	Right-arm off break	2014	INR20 million (US$310,000)	Occasional wicket-keeper
+21	JP Duminy	South Africa	14 April 1984 (age 31)	Left-handed	Right-arm off break	2014	INR22 million (US$350,000)	Overseas/Captain
+41	Shreyas Iyer	India	6 December 1994 (age 20)	Right-handed	Right-arm leg break	2015	INR26 million (US$410,000)	
+All-rounders
+12	Yuvraj Singh	India	12 December 1981 (age 33)	Left-handed	Left-arm off break	2015	INR160 million (US$2.5 million)	
+19	Jayant Yadav	India	22 January 1990 (age 25)	Right-handed	Right-arm off break	2014	INR1 million (US$16,000)	
+69	Angelo Mathews	Sri Lanka	2 June 1987 (age 28)	Right-handed	Right-arm medium-fast	2015	INR75 million (US$1.2 million)	Overseas
+81	Albie Morkel	South Africa	10 June 1981 (age 34)	Left-handed	Right-arm medium-fast	2015	INR3 million (US$47,000)	Overseas
+Wicket-keepers
+01	Quinton de Kock	South Africa	17 December 1992 (age 22)	Left-handed		2014	INR35 million (US$550,000)	Overseas
+8	CM Gautam	India	8 March 1986 (age 29)	Right-handed		2015	INR2 million (US$31,000)	
+Bowlers
+3	Amit Mishra	India	24 November 1982 (age 32)	Right-handed	Right-arm leg break	2015	INR35 million (US$550,000)	
+9	Domnic Joseph	India	9 March 1981 (age 34)	Right-handed	Right-arm medium-fast	2015	INR7.5 million (US$120,000)	
+11	Mohammed Shami[a]	India	9 March 1990 (age 25)	Right-handed	Right-arm fast-medium	2014	INR42.5 million (US$670,000)	
+13	Nathan Coulter-Nile	Australia	11 October 1987 (age 27)	Right-handed	Right-arm fast	2014	INR42.5 million (US$670,000)	Overseas
+28	Gurinder Sandhu	Australia	14 June 1993 (age 22)	Left-handed	Right-arm fast-medium	2015	INR17 million (US$270,000)	Overseas
+34	Zaheer Khan	India	7 October 1978 (age 36)	Right-handed	Left-arm fast-medium	2015	INR40 million (US$630,000)	
+77	Jaydev Unadkat	India	18 October 1991 (age 23)	Left-handed	Left-arm medium-fast	2014	INR28 million (US$440,000)	
+88	Shahbaz Nadeem	India	12 August 1989 (age 25)	Right-handed	Slow left arm orthodox	2014	INR8.5 million (US$130,000)	
+99	Imran Tahir	South Africa	27 March 1979 (age 36)	Right-handed	Right-arm leg break googly	2014	NA
