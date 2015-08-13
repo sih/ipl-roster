@@ -1,0 +1,25 @@
+Batsmen
+3	Ajinkya Rahane	India	5 June 1988 (age 27)	Right-handed	Right-arm medium	2014	INR75 million (US$1.2 million)	
+49	Steve Smith	Australia	2 June 1989 (age 26)	Right-handed	Right-arm leg break	2014	INR40 million (US$630,000)	Overseas/Vice-captain
+69	Karun Nair	India	6 December 1991 (age 23)	Right-handed	Right-arm off break	2014	INR7.5 million (US$120,000)	
+All-rounders
+5	Deepak Hooda	India	19 April 1995 (age 20)	Right-handed	Right-arm off break	2014	INR4 million (US$63,000)	
+10	Chris Morris	South Africa	30 April 1987 (age 28)	Right-handed	Right-arm fast-medium	2015	INR14 million (US$220,000)	Overseas
+12	Dinesh Salunkhe	India	12 November 1982 (age 32)	Right-handed	Right-arm leg break	2015	INR1 million (US$16,000)	
+18	Ankit Sharma	India	20 April 1991 (age 24)	Left-handed	Slow left-arm orthodox	2014	INR10 million (US$160,000)	
+22	Rajat Bhatia	India	22 October 1979 (age 35)	Right-handed	Right-arm medium	2014	INR17 million (US$270,000)	
+25	Abhishek Nayar	India	8 October 1983 (age 31)	Left-handed	Right-arm medium	2014	INR10 million (US$160,000)	
+33	Shane Watson	Australia	17 June 1981 (age 34)	Right-handed	Right-arm fast-medium	2014	INR125 million (US$2.0 million)	Overseas/Captain
+44	James Faulkner	Australia	29 April 1990 (age 25)	Right-handed	Left-arm medium-fast	2014	INR95 million (US$1.5 million)	Overseas
+84	Stuart Binny	India	3 June 1984 (age 31)	Right-handed	Right-arm medium	2014	INR40 million (US$630,000)	
+Wicket-keepers
+9	Sanju Samson	India	11 November 1994 (age 20)	Right-handed	–	2014	INR40 million (US$630,000)	
+77	Dishant Yagnik	India	22 June 1983 (age 32)	Left-handed	–	2014	INR3 million (US$47,000)	
+Bowlers
+02	Pravin Tambe	India	8 October 1971 (age 43)	Right-handed	Right-arm leg break	2014	INR1 million (US$16,000)	
+8	Tim Southee	New Zealand	11 December 1988 (age 26)	Right-handed	Right-arm medium-fast	2014	INR12 million (US$190,000)	Overseas
+16	Rusty Theron	South Africa	24 June 1985 (age 30)	Right-handed	Right-arm medium-fast	2015	INR3 million (US$47,000)	Overseas
+20	Rahul Tewatia	India	20 May 1993 (age 22)	Left-handed	Right-arm leg break	2014	INR10 million (US$160,000)	
+23	Kane Richardson[a]	Australia	12 February 1991 (age 24)	Right-handed	Right-arm medium-fast	2014	INR10 million (US$160,000)	Overseas
+31	Ben Cutting	Australia	30 January 1987 (age 28)	Right-handed	Right-arm medium-fast	2014	INR8 million (US$130,000)	Overseas
+91	Dhawal Kulkarni	India	10 December 1988 (age 26)	Right-handed	Right-arm medium-fast	2014	INR11 million (US$170,000)

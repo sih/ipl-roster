@@ -3,7 +3,7 @@ package eu.waldonia.ipl.populator;
 import static org.junit.Assert.*;
 
 import java.net.URI;
-import java.util.List;
+import java.util.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,7 +57,11 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 			// batter
 			assertNull(p);
 			// run in the file
-			rfp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster/csk.txt"));
+			Map<String,String> linesInError = rfp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster/csk.txt"));
+			
+			// check no errors
+			assertTrue(linesInError.isEmpty());
+			
 			// check batter
 			p = playerRepository.findPlayerByName("Suresh Raina");
 			

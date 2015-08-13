@@ -72,7 +72,7 @@ public class RosterFileProcessor {
 		logger = LoggerFactory.getLogger(RosterFileProcessor.class);
 	}
 
-	public void process(final URI fileLocation) throws Exception {
+	public Map<String,String> process(final URI fileLocation) throws Exception {
 
 		Path p = Paths.get(fileLocation).toAbsolutePath();
 		String[] directories = p.toString().split("/");
@@ -88,7 +88,9 @@ public class RosterFileProcessor {
 		Year y = parseYear(directories); // grab year from path
 
 		Stream<String> lines = Files.lines(Paths.get(fileLocation));
-		processStream(lines, f, y);
+		Map<String, String> linesInError = processStream(lines, f, y);
+		
+		return linesInError; 
 
 	}
 
@@ -120,23 +122,31 @@ public class RosterFileProcessor {
 		return f;
 	}
 
-	private void processStream(Stream<String> stream, Franchise f, Year y) {
+	private Map<String,String> processStream(Stream<String> stream, Franchise f, Year y) {
 
+		Map<String,String> linesInError = new HashMap<String,String>();
 		Iterator<String> lines = stream.iterator();
 		String type = null;
-		while (lines.hasNext()) {
-			String line = lines.next();
-			if (line.equals("Batsmen") || line.equals("All-rounders")
-					|| line.equals("Wicket-keepers")
-					|| line.equals("Bowlers")) {
-				type = line;
-			}
-			else {
-				Map<Player, Map<String, String>> playerAttrs = parseLine(line,
-						type);
-				populateAndSavePlayer(playerAttrs, y, f);
-			}
+		String line = null;
+		try {
+			while (lines.hasNext()) {
+				line = lines.next();
+				if (line.equals("Batsmen") || line.equals("All-rounders")
+						|| line.equals("Wicket-keepers")
+						|| line.equals("Bowlers")) {
+					type = line;
+				}
+				else {
+					Map<Player, Map<String, String>> playerAttrs = parseLine(
+							line, type);
+					populateAndSavePlayer(playerAttrs, y, f);
+				}
+			} 
+		} catch (Exception e) {
+			linesInError.put(line, e.getMessage());
 		}
+		
+		return linesInError;
 
 	}
 

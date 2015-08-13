@@ -1,0 +1,25 @@
+Batsmen
+1	Manish Pandey	India	10 September 1989 (age 25)	Right-handed	Right-arm off break	2014	INR17 million (US$270,000)	
+23	Gautam Gambhir	India	14 October 1981 (age 33)	Left-handed	Right-arm leg break	2014	INR125 million (US$2.0 million)	Captain
+37	Robin Uthappa	India	11 September 1985 (age 29)	Right-handed	Right-arm medium	2014	INR50 million (US$790,000)	Occasional wicketkeeper
+50	Chris Lynn[a]	Australia	10 April 1990 (age 25)	Right-handed	Slow left-arm orthodox	2014	INR13 million (US$200,000)	Overseas
+212	Suryakumar Yadav	India	14 September 1990 (age 24)	Right-handed	Right-arm medium	2014	INR7 million (US$110,000)	
+All-rounders
+12	Andre Russell	Jamaica	29 April 1988 (age 27)	Right-handed	Right-arm fast-medium	2014	INR6 million (US$94,000)	Overseas
+14	Azhar Mahmood	England	28 February 1975 (age 40)	Right-handed	Right-arm medium-fast	2015	Replacement signing	Overseas
+22	Johan Botha	South Africa	2 May 1982 (age 33)	Right-handed	Right-arm off break	2015	Replacement signing	Overseas
+24	Yusuf Pathan	India	17 November 1982 (age 32)	Right-handed	Right-arm off break	2014	INR32.5 million (US$510,000)	
+27	Ryan ten Doeschate	Netherlands	30 June 1980 (age 35)	Right-handed	Right-arm medium-fast	2014	INR10 million (US$160,000)	Overseas
+75	Shakib Al Hasan	Bangladesh	24 March 1987 (age 28)	Left-handed	Slow left-arm orthodox	2014	INR28 million (US$440,000)	Overseas
+Wicket-keepers
+25	Sheldon Jackson	India	27 September 1986 (age 28)	Right-handed		2015	INR1.5 million (US$24,000)
+Bowlers
+11	Veer Pratap Singh	India	3 May 1992 (age 23)	Right-handed	Right-arm medium-fast	2014	INR4 million (US$63,000)	
+18	Kuldeep Yadav	India	14 December 1994 (age 20)	Left-handed	Slow left-arm chinaman	2014	INR4 million (US$63,000)	
+19	Umesh Yadav	India	25 October 1987 (age 27)	Right-handed	Right-arm fast	2014	INR26 million (US$410,000)	
+21	Piyush Chawla	India	24 December 1988 (age 26)	Left-handed	Right-arm leg break	2014	INR42.5 million (US$670,000)	
+30	Pat Cummins	Australia	8 May 1993 (age 22)	Right-handed	Right-arm fast	2014	INR10 million (US$160,000)	Overseas
+31	Brad Hogg	Australia	6 February 1971 (age 44)	Left-handed	Slow left-arm chinaman	2015	INR5 million (US$79,000)	Overseas
+65	Morne Morkel	South Africa	6 October 1984 (age 30)	Left-handed	Right-arm fast	2014	INR28 million (US$440,000)	Overseas
+74	Sunil Narine	Trinidad and Tobago	26 May 1988 (age 27)	Left-handed	Right-arm off break	2014	INR95 million (US$1.5 million)	Overseas
+94	KC Cariappa	India	13 April 1994 (age 21)	Right-handed	Right-arm leg break	2015	INR24 million (US$380,000)

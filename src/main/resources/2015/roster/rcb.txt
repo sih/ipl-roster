@@ -1,0 +1,27 @@
+Batsmen
+9	Mandeep Singh	India	18 December 1991 (age 23)	Right-handed	Right arm medium	2015	Traded player	
+11	Rilee Rossouw	South Africa	9 October 1989 (age 25)	Left-handed	Right-arm off break	2014	INR5 million (US$79,000)	Overseas
+18	Virat Kohli	India	5 November 1988 (age 26)	Right-handed	Right-arm medium	2014	INR125 million (US$2.0 million)	Captain
+33	Subramaniam Badrinath	India	30 August 1980 (age 34)	Right-handed	Right-arm off break	2015	INR3 million (US$47,000)	
+53	Nic Maddinson	Australia	21 December 1991 (age 23)	Left-handed	Left-arm orthodox	2014	INR5 million (US$79,000)	Overseas
+97	Sarfaraz Khan	India	27 October 1997 (age 17)	Right-handed	Right-arm off break	2015	INR5 million (US$79,000)	
+333	Chris Gayle	Jamaica	21 September 1979 (age 35)	Left-handed	Right-arm off break	2014	INR95 million (US$1.5 million)	Overseas
+451	Vijay Zol	India	23 November 1994 (age 20)	Left-handed	Right-arm off break	2014	INR3 million (US$47,000)	
+All-rounders
+88	Darren Sammy	Saint Lucia	20 December 1983 (age 31)	Right-handed	Right arm medium-fast	2015	INR28 million (US$440,000)	Overseas
+96	David Wiese	South Africa	18 May 1985 (age 30)	Right-handed	Right arm medium-fast	2015	INR28 million (US$440,000)	Overseas
+Wicket-keepers
+5	Yogesh Takawale	India	5 December 1984 (age 30)	Right-handed		2014	INR1 million (US$16,000)	
+17	AB de Villiers	South Africa	17 February 1984 (age 31)	Right-handed	Right-arm medium	2014	INR75 million (US$1.2 million)	Overseas
+19	Dinesh Karthik	India	1 June 1985 (age 30)	Right-handed		2015	INR105 million (US$1.7 million)	
+36	Manvinder Bisla	India	27 December 1984 (age 30)	Right-handed		2015	Traded player	
+Bowlers
+2	Ashok Dinda	India	25 March 1984 (age 31)	Right-handed	Right-arm medium-fast	2014	INR15 million (US$240,000)	
+3	Yuzvendra Chahal	India	23 July 1990 (age 24)	Right-handed	Right-arm leg break	2014	INR1 million (US$16,000)	
+6	Sreenath Aravind	India	8 April 1984 (age 31)	Left-handed	Left-arm medium-fast	2015	Replacement signing	
+13	Harshal Patel	India	23 November 1990 (age 24)	Right-handed	Right-arm medium-fast	2014	INR4 million (US$63,000)	
+21	Iqbal Abdulla	India	2 December 1989 (age 25)	Left-handed	Slow left-arm orthodox	2015	Traded player	
+23	Abu Nechim	India	5 November 1988 (age 26)	Right-handed	Right-arm medium-fast	2014	INR3 million (US$47,000)	
+45	Varun Aaron	India	29 October 1989 (age 25)	Right-handed	Right-arm fast	2014	INR20 million (US$310,000)	
+56	Mitchell Starc	Australia	30 January 1990 (age 25)	Left-handed	Left-arm fast	2014	INR50 million (US$790,000)	Overseas
+77	Sean Abbott	Australia	29 February 1992 (age 23)	Right-handed	Right-arm fast-medium	2015	INR10 million (US$160,000)	Overseas

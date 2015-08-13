@@ -1,0 +1,22 @@
+Batsmen
+11	KL Rahul	India	18 April 1992 (age 23)	Right-handed	Right-arm medium	2014	INR10 million (US$160,000)	Occasional wicket-keeper
+16	Eoin Morgan	England	10 September 1986 (age 28)	Left-handed	Right-arm medium	2015	INR15 million (US$240,000)	Overseas
+20	Hanuma Vihari	India	13 October 1993 (age 21)	Right-handed	Right-arm off break	2014	INR1 million (US$16,000)	
+22	Kane Williamson	New Zealand	8 August 1990 (age 24)	Right-handed	Right-arm off break	2015	INR6 million (US$94,000)	Overseas
+25	Shikhar Dhawan	India	5 December 1985 (age 29)	Left-handed	Right-arm off break	2014	INR95 million (US$1.5 million)	
+31	David Warner	Australia	27 October 1986 (age 28)	Left-handed	Right-arm leg break	2014	INR55 million (US$870,000)	Overseas/Captain
+All-rounders
+2	Ashish Reddy	India	24 February 1991 (age 24)	Right-handed	Right-arm medium	2014	INR2 million (US$31,000)	
+5	Moises Henriques	Australia	1 February 1987 (age 28)	Right-handed	Right-arm medium-fast	2014	INR10 million (US$160,000)	Overseas
+10	Ravi Bopara	England	4 May 1985 (age 30)	Right-handed	Right-arm medium	2015	INR10 million (US$160,000)	Overseas
+21	Parvez Rasool	India	13 February 1989 (age 26)	Right-handed	Right-arm off break	2014	INR9.5 million (US$150,000)	
+28	Bipul Sharma	India	28 September 1983 (age 31)	Left-handed	Slow left-arm orthodox	2015		Replacement signing
+33	Karn Sharma	India	13 October 1987 (age 27)	Left-handed	Right-arm leg break	2014	INR37.5 million (US$590,000)	
+Wicket-keepers
+7	Naman Ojha	India	20 July 1983 (age 31)	Right-handed	Right-arm medium	2014	INR5 million (US$79,000)	
+Bowlers
+1	Ishant Sharma	India	2 September 1988 (age 26)	Right-handed	Right-arm fast-medium	2014	INR26 million (US$410,000)	
+8	Dale Steyn	South Africa	27 June 1983 (age 32)	Right-handed	Right-arm fast	2014	INR125 million (US$2.0 million)	Overseas
+15	Bhuvneshwar Kumar	India	5 February 1990 (age 25)	Right-handed	Right-arm medium-fast	2014	INR42.5 million (US$670,000)	
+18	Trent Boult	New Zealand	22 July 1989 (age 25)	Right-handed	Left-arm fast	2015	INR38 million (US$600,000)	Overseas
+19	Praveen Kumar	India	2 October 1986 (age 28)	Right-handed	Right-arm medium-fast	2015	INR22 million (US$350,000)
