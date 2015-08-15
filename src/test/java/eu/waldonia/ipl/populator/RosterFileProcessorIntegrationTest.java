@@ -122,6 +122,7 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 	}
 
 	/*
+	 * Tests Issue #14 where Traded Players have no contract value set
 	 * Failure on this line 
 	 * 15	Unmukt Chand	India	26 March 1993 (age 22)	Right-handed	Right arm off break	2015	Traded player	
 	 * String index out of range: -1}
@@ -142,6 +143,16 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 			// check batter
 			p = playerRepository.findPlayerByName("Unmukt Chand");
 			assertNotNull(p);
+			
+			// test traded is set
+			List<Contract> contracts = p.contracts();
+			assertNotNull(contracts);
+			assertEquals(1, contracts.size());
+			
+			Contract c = contracts.iterator().next();
+			assertTrue(c.traded());
+			assertEquals(0,c.value());
+			assertNull(c.currency());
 		}
 		catch (Exception e) {
 			fail("Shouldn't have thrown exception "+e.getMessage());
@@ -149,4 +160,45 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 
 	}
 	
+	
+	/*
+	 * Tests Issue #15 where replacement players have no contract value set
+	 * Failure on this line 
+	 * 6	Sreenath Aravind	India	8 April 1984 (age 31) Left-handed	Left-arm medium-fast	2015	Replacement signing
+	 * String index out of range: -1}
+	 */
+	@Test
+	public void shouldProcessRoyalChallengersBangalore() {
+		try {
+			Player p = null;			
+			p = playerRepository.findPlayerByName("Sreenath Aravind");
+			// batter
+			assertNull(p);
+			// run in the file
+			Map<String,String> linesInError = rfp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster/rcb.txt"));
+			
+			// check no errors
+			assertTrue(linesInError.isEmpty());
+			
+			// check batter
+			p = playerRepository.findPlayerByName("Sreenath Aravind");
+			assertNotNull(p);
+			
+			// test replacement is set
+			List<Contract> contracts = p.contracts();
+			assertNotNull(contracts);
+			assertEquals(1, contracts.size());
+			
+			Contract c = contracts.iterator().next();
+			assertTrue(c.replacement());
+			assertEquals(0,c.value());
+			assertNull(c.currency());
+			
+			
+		}
+		catch (Exception e) {
+			fail("Shouldn't have thrown exception "+e.getMessage());
+		}
+
+	}
 }

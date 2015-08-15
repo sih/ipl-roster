@@ -39,6 +39,7 @@ public class RosterFileProcessor {
 	static final String SALARY = "salary";
 	static final String CURRENCY = "currency";
 	static final String TRADED_PLAYER = "tradedPlayer";
+	static final String REPLACEMENT_SIGNING = "replacementPlayer";
 	static final String BOWL_PACE = "pace";
 	static final String BOWL_VARIETY = "variety";
 	static final String COUNTRY = "country";
@@ -161,7 +162,12 @@ public class RosterFileProcessor {
 		// contract
 		Contract c = null;
 		if (attrs.containsKey(TRADED_PLAYER)) {
-			c = new Contract(y, p, true);
+			c = new Contract(y, p);
+			c.traded(true);
+		}
+		else if (attrs.containsKey(REPLACEMENT_SIGNING)) {
+			c = new Contract(y, p);
+			c.replacement(true);
 		}
 		else {
 			Integer value = Integer.parseInt(attrs.get(SALARY));
@@ -289,6 +295,9 @@ public class RosterFileProcessor {
 			if (line.toLowerCase().contains("traded player")) {
 				attrMap.put(TRADED_PLAYER, "Traded Player");
 			}
+			else if (line.toLowerCase().contains("replacement signing")) {
+				attrMap.put(REPLACEMENT_SIGNING, "Replacement Signing");
+			} 
 			else {
 				int salIndex = line.indexOf("INR");
 				int millionIndex = line.indexOf(" million");
