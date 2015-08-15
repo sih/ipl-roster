@@ -201,4 +201,51 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 		}
 
 	}
+	
+	
+	/*
+	 * Tests Issue #16 where Imran Tahir has NA set for his contract value
+	 * Failure on this line
+	 * 99	Imran Tahir	South Africa	27 March 1979 (age 36)	Right-handed	Right-arm leg break googly	2014	
+	 * NA=String index out of range: -1	 
+	 */
+	@Test
+	public void shouldProcessDelhiDaredevils() {
+		try {
+			Player p = null;			
+			p = playerRepository.findPlayerByName("Imran Tahir");
+			// batter
+			assertNull(p);
+			// run in the file
+			Map<String,String> linesInError = rfp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster/dd.txt"));
+			
+			// check no errors
+			assertTrue(linesInError.isEmpty());
+			
+			// check batter
+			p = playerRepository.findPlayerByName("Imran Tahir");
+			assertNotNull(p);
+			
+			// should have a contract
+			List<Contract> contracts = p.contracts();
+			assertNotNull(contracts);
+			assertEquals(1, contracts.size());
+			
+			Contract c = contracts.iterator().next();
+			// but not a replacement
+			assertFalse(c.replacement());
+			// or a traded player
+			assertFalse(c.replacement());
+			// and no contract value
+			assertEquals(0,c.value());
+			assertNull(c.currency());
+			
+			
+		}
+		catch (Exception e) {
+			fail("Shouldn't have thrown exception "+e.getMessage());
+		}
+
+	}
+	
 }

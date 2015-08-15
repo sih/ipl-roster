@@ -160,16 +160,15 @@ public class RosterFileProcessor {
 		p.name = attrs.get(NAME);
 
 		// contract
-		Contract c = null;
+		Contract c = new Contract(y, p);
 		if (attrs.containsKey(TRADED_PLAYER)) {
-			c = new Contract(y, p);
 			c.traded(true);
 		}
 		else if (attrs.containsKey(REPLACEMENT_SIGNING)) {
-			c = new Contract(y, p);
 			c.replacement(true);
 		}
-		else {
+		// else if to fix issue #16 where some just have NA
+		else if (attrs.containsKey(SALARY)) {
 			Integer value = Integer.parseInt(attrs.get(SALARY));
 			c = new Contract(y, value, attrs.get(CURRENCY), p);
 		}
@@ -291,14 +290,16 @@ public class RosterFileProcessor {
 			}
 			// TODO think of a better way to find sal
 			
-			// FIX issue #14 where traded players don't have a contract valueM
+			// FIX issue #14 where traded players don't have a contract value
 			if (line.toLowerCase().contains("traded player")) {
 				attrMap.put(TRADED_PLAYER, "Traded Player");
 			}
+			// FIX issue #15 where replacement signings don't have a contract value
 			else if (line.toLowerCase().contains("replacement signing")) {
 				attrMap.put(REPLACEMENT_SIGNING, "Replacement Signing");
 			} 
-			else {
+			// FIX issue #16 where some players are just NA
+			else if (line.toLowerCase().contains("million")) {
 				int salIndex = line.indexOf("INR");
 				int millionIndex = line.indexOf(" million");
 

@@ -40,7 +40,10 @@ public class RosterSeasonProcessorIntegrationTest extends WrappingServerIntegrat
 			// run in the file
 			Map<String,Map<String,String>> filesInError = rfp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster"));
 
-			assertTrue(filesInError.isEmpty());
+			for (Map<String,String> fileReport : filesInError.values()) {
+				assertTrue(fileReport.isEmpty());				
+			}
+
 		} 
 		catch (Exception e) {
 			fail("Shouldn't have thrown exception "+e.getMessage());
