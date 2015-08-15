@@ -38,6 +38,7 @@ public class RosterFileProcessor {
 	static final String NAME = "name";
 	static final String SALARY = "salary";
 	static final String CURRENCY = "currency";
+	static final String TRADED_PLAYER = "tradedPlayer";
 	static final String BOWL_PACE = "pace";
 	static final String BOWL_VARIETY = "variety";
 	static final String COUNTRY = "country";
@@ -158,8 +159,14 @@ public class RosterFileProcessor {
 		p.name = attrs.get(NAME);
 
 		// contract
-		Integer value = Integer.parseInt(attrs.get(SALARY));
-		Contract c = new Contract(y, value, attrs.get(CURRENCY), p);
+		Contract c = null;
+		if (attrs.containsKey(TRADED_PLAYER)) {
+			c = new Contract(y, p, true);
+		}
+		else {
+			Integer value = Integer.parseInt(attrs.get(SALARY));
+			c = new Contract(y, value, attrs.get(CURRENCY), p);
+		}
 		Integer shirtNumber = Integer.parseInt(attrs.get(SHIRT_NUMBER));
 		p.signed(c, f, shirtNumber);
 		f.holds(c); // don't forget the franchise
@@ -277,17 +284,26 @@ public class RosterFileProcessor {
 				}
 			}
 			// TODO think of a better way to find sal
-			int salIndex = line.indexOf("INR");
-			int millionIndex = line.indexOf(" million");
+			
+			// FIX issue #14 where traded players don't have a contract valueM
+			if (line.toLowerCase().contains("traded player")) {
+				attrMap.put(TRADED_PLAYER, "Traded Player");
+			}
+			else {
+				int salIndex = line.indexOf("INR");
+				int millionIndex = line.indexOf(" million");
 
-			String sal = line.substring(salIndex, millionIndex);
-			String currency = sal.substring(0, 3);
+				String sal = line.substring(salIndex, millionIndex);
+				String currency = sal.substring(0, 3);
 
-			BigDecimal bdSal = new BigDecimal(sal.substring(3));
-			bdSal = bdSal.multiply(new BigDecimal(1000000));
+				BigDecimal bdSal = new BigDecimal(sal.substring(3));
+				bdSal = bdSal.multiply(new BigDecimal(1000000));
 
-			attrMap.put(SALARY, String.valueOf(bdSal.intValue()));
-			attrMap.put(CURRENCY, currency);
+				attrMap.put(SALARY, String.valueOf(bdSal.intValue()));
+				attrMap.put(CURRENCY, currency);
+
+			}
+			
 		}
 		return playerAttribtues;
 	}

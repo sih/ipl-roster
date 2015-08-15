@@ -121,4 +121,32 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 		}
 	}
 
+	/*
+	 * Failure on this line 
+	 * 15	Unmukt Chand	India	26 March 1993 (age 22)	Right-handed	Right arm off break	2015	Traded player	
+	 * String index out of range: -1}
+	 */
+	@Test
+	public void shouldProcessMumbaiIndians() {
+		try {
+			Player p = null;			
+			p = playerRepository.findPlayerByName("Unmukt Chand");
+			// batter
+			assertNull(p);
+			// run in the file
+			Map<String,String> linesInError = rfp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster/mi.txt"));
+			
+			// check no errors
+			assertTrue(linesInError.isEmpty());
+			
+			// check batter
+			p = playerRepository.findPlayerByName("Unmukt Chand");
+			assertNotNull(p);
+		}
+		catch (Exception e) {
+			fail("Shouldn't have thrown exception "+e.getMessage());
+		}
+
+	}
+	
 }

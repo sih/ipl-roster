@@ -59,8 +59,9 @@ public class RosterSeasonProcessor {
 
 			// for each item
 			for (Path path : teamRosters) {
-				String fileName = path.getFileName().toString();
-				errorsByFile.put(fileName,rfp.process(path.toUri()));
+				String filename = path.getFileName().toString();
+				logger.info("Processing "+filename);
+				errorsByFile.put(filename,rfp.process(path.toUri()));
 			}
 
 		}

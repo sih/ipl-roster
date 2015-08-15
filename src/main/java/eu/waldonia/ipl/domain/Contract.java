@@ -11,11 +11,18 @@ public class Contract {
 	private String currency;
 	private Franchise franchise;
 	private Player player;
+	private boolean traded;
 	
 	public Contract(Year year, int value, String currency, Player p) {
 		this.year = year;
 		this.value = value;
 		this.currency = currency;
+		this.player = p;
+	}
+	
+	public Contract(Year year, Player p, boolean traded) {
+		this.traded(traded);
+		this.year = year;
 		this.player = p;
 	}
 	
@@ -48,5 +55,13 @@ public class Contract {
 	
 	public Player player() {
 		return player;
+	}
+	
+	public boolean traded() {
+		return traded;
+	}
+	
+	public void traded(final boolean traded) {
+		this.traded = traded;
 	}
 }
