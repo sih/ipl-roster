@@ -14,6 +14,8 @@
 		<spring.security.version>4.0.0.RC1</spring.security.version>
 		<neo4j.version>2.1.7</neo4j.version>
 		<sdn.version>4.0.0.M1-ISSUE8</sdn.version>
+		<compiler.version>1.8</compiler.version>
+		<aspectj.version>1.8.1</aspectj.version>
 	</properties>
 
 	<dependencies>
@@ -61,6 +63,7 @@
 			<artifactId>spring-data-neo4j</artifactId>
 			<version>${sdn.version}</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>opensymphony</groupId>
@@ -130,6 +133,19 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.3.3</version>
 		</dependency>
+
+
+		<!-- Spring AOP + AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.1</version>
+		</dependency>
 	</dependencies>
 
 
@@ -149,19 +165,18 @@
 		</repository>
 
 	</repositories>
-	
-	<build>
-	    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${compiler.version}</source>
+					<target>${compiler.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>

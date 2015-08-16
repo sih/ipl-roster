@@ -1,25 +1,37 @@
 package eu.waldonia.ipl.events;
 
+import java.lang.reflect.Field;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.session.Session;
-import org.neo4j.ogm.session.transaction.*;
+import org.neo4j.ogm.mapper.MappingContext;
+import org.neo4j.ogm.session.*;
 import org.slf4j.*;
-import org.springframework.data.neo4j.transaction.Neo4jTransactionStatus;
+import org.springframework.aop.framework.Advised;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.stereotype.Component;
 
-import eu.waldonia.ipl.populator.RosterFileProcessor;
-
 /**
- * Not thread-safe
+ * Not thread-safe - perthis?
  * @author sid
  */
+
 @Aspect
-@Component
 public class TransactionWatcher {
 
 	Logger logger = LoggerFactory.getLogger("TransactionWatcher");
+
+	
+	@After("execution(* org.neo4j.ogm.session.delegates.SaveDelegate.save(..))")
+	public void inSaveDelegate() throws Throwable {
+		logger.info("In delegate ... just saved");
+	}
+	
+	@After("execution(* org.neo4j.ogm.mapper.EntityGraphMapper.map(..))")
+	public void inMap() throws Throwable {
+		logger.info("In map ... just mapped");
+	}
+	
 	
 	Object itemToBeSaved;
 	
@@ -31,14 +43,48 @@ public class TransactionWatcher {
 		itemToBeSaved = null;
 	}
 	
-	@Around("execution(* org.neo4j.ogm.session.Session.save(..))")
+	@Around("execution(* org.neo4j.ogm.session.Neo4jSession.save(..))")
 	public void neoSave(ProceedingJoinPoint pjp) throws Throwable {
-		
-		Object[] args = pjp.getArgs();
+
 		Session s = (Session)pjp.getThis();
-		logger.info("Saving "+args[0].getClass()+" with attrs ");
-		itemToBeSaved = args[0];
+		Neo4jSession n4js = getTargetObject(s, Neo4jSession.class);
+
+		Object[] args = pjp.getArgs();
+		Object itemToBeSaved = args[0];
+
+		// run this here so we have an id
 		pjp.proceed(args);
+
+		// grab the id of the object to be saved
+		Long id = null;
+		Field idField = itemToBeSaved.getClass().getDeclaredField("id");
+		if (idField != null) {
+			idField.setAccessible(true);
+			id = (Long)(idField.get(itemToBeSaved));
+		}
+		
+		// grab the mapping context
+		Field mappingContextField = Neo4jSession.class.getDeclaredField("mappingContext");
+		mappingContextField.setAccessible(true);
+		MappingContext mc = (MappingContext) mappingContextField.get(n4js);
+
+		if (id != null) {
+			logger.info(mc.getNodeEntity(id).toString());
+		}
+
+	}
+
+	/*
+	 * @see http://www.techper.net/2009/06/05/how-to-acess-target-object-behind-a-spring-proxy/
+	 */
+	@SuppressWarnings({"unchecked"})
+	private <T> T getTargetObject(Object proxy, Class<T> targetClass) throws Exception {
+	  if (AopUtils.isJdkDynamicProxy(proxy)) {
+	    return (T) ((Advised)proxy).getTargetSource().getTarget();
+	  } 
+	  else {
+	    return (T) proxy; // expected to be cglib proxy then, which is simply a specialized class
+	  }
 	}
 	
 }
