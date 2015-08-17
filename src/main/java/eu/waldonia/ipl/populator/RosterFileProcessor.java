@@ -349,26 +349,28 @@ public class RosterFileProcessor {
 			variety = Bowls.ORTHODOX;
 		}
 		// pace
-		if (bowlDesc.contains("slow")) {
-			pace = Bowls.SLOW;
-		}
-		else if (bowlDesc.contains("medium-fast")) {
-			pace = Bowls.MEDIUM_FAST;
-		}
-		else if (bowlDesc.contains("medium fast")) {
-			pace = Bowls.MEDIUM_FAST;
-		}
-		else if (bowlDesc.contains("fast-medium")) {
-			pace = Bowls.FAST_MEDIUM;
-		}
-		else if (bowlDesc.contains("fast medium")) {
-			pace = Bowls.FAST_MEDIUM;
-		}
-		else if (bowlDesc.contains("medium")) {
-			pace = Bowls.MEDIUM;
-		}
-		else if (bowlDesc.contains("fast")) {
-			pace = Bowls.FAST;
+		if (null == pace) {
+			if (bowlDesc.contains("slow")) {
+				pace = Bowls.SLOW;
+			}
+			else if (bowlDesc.contains("medium-fast")) {
+				pace = Bowls.MEDIUM_FAST;
+			}
+			else if (bowlDesc.contains("medium fast")) {
+				pace = Bowls.MEDIUM_FAST;
+			}
+			else if (bowlDesc.contains("fast-medium")) {
+				pace = Bowls.FAST_MEDIUM;
+			}
+			else if (bowlDesc.contains("fast medium")) {
+				pace = Bowls.FAST_MEDIUM;
+			}
+			else if (bowlDesc.contains("medium")) {
+				pace = Bowls.MEDIUM;
+			}
+			else if (bowlDesc.contains("fast")) {
+				pace = Bowls.FAST;
+			}
 		}
 
 		if (null == pace) {

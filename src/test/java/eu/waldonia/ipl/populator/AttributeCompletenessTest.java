@@ -31,6 +31,9 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
     RosterSeasonProcessor rsp;
 	
 	@Autowired
+    RosterFileProcessor rfp;
+	
+	@Autowired
     PlayerRepository playerRepository;
 	
 	@Autowired
@@ -43,12 +46,37 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
     }
     
     @Test
-    public void shouldHaveBowlingPace() {
+    public void shouldHaveBowlingPaceKXIP() {
     	// run in the file
     	try {
-			Map<String, Map<String, String>> linesInError = rsp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster"));
+			Map<String, String> linesInError = rfp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster/kxip.txt"));
 			
-			for (Map<String,String> errors : linesInError.values()) {
+			assertTrue(linesInError.isEmpty());
+			Iterable<Player> playaz = playerRepository.findAll();
+			
+			for (Player player : playaz) {
+				logger.info("Processing "+player.name);
+				if (player instanceof Bowler) {
+					Bowls bowls = player.bowls;
+					assertNotNull(bowls);
+					assertNotNull(bowls.pace);
+				}
+			}
+			
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	
+    }
+    
+    // @Test
+    public void shouldAllHaveBowlingPace() {
+    	// run in the file
+    	try {
+			Map<String, Map<String, String>> filesInError = rsp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster"));
+			
+			for (Map<String,String> errors : filesInError.values()) {
 				assertTrue(errors.isEmpty());
 			}
 			
@@ -66,10 +94,7 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
 			}
 			
 		} 
-    	catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
