@@ -45,7 +45,36 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
         return PersistenceContext.NEO4J_PORT;
     }
     
+    /**
+     * KS doesn't have his bowling arm specified
+     */
     @Test
+    public void shouldProcessKaranveerSingh() {
+    	// run in the file
+    	try {
+			Map<String, String> linesInError = rfp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster/kxip.minimal"));
+			
+			assertTrue(linesInError.isEmpty());
+			Iterable<Player> playaz = playerRepository.findAll();
+			
+			for (Player player : playaz) {
+				logger.info("Processing "+player.name());
+				if (player instanceof Bowler) {
+					Bowls bowls = player.bowls();
+					assertNotNull(bowls);
+					assertNotNull(bowls.pace);
+				}
+			}
+			
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	
+    	
+    }
+    
+    // @Test
     public void shouldHaveBowlingPaceKXIP() {
     	// run in the file
     	try {
@@ -55,9 +84,9 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
 			Iterable<Player> playaz = playerRepository.findAll();
 			
 			for (Player player : playaz) {
-				logger.info("Processing "+player.name);
+				logger.info("Processing "+player.name());
 				if (player instanceof Bowler) {
-					Bowls bowls = player.bowls;
+					Bowls bowls = player.bowls();
 					assertNotNull(bowls);
 					assertNotNull(bowls.pace);
 				}
@@ -85,9 +114,9 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
 			
 			
 			for (Player player : playaz) {
-				logger.info("Processing "+player.name);
+				logger.info("Processing "+player.name());
 				if (player instanceof Bowler) {
-					Bowls bowls = player.bowls;
+					Bowls bowls = player.bowls();
 					assertNotNull(bowls);
 					assertNotNull(bowls.pace);
 				}

@@ -157,7 +157,7 @@ public class RosterFileProcessor {
 
 		Player p = playerAttrs.keySet().iterator().next();
 		Map<String, String> attrs = playerAttrs.get(p);
-		p.name = attrs.get(NAME);
+		p.name(attrs.get(NAME));
 
 		// contract
 		Contract c = new Contract(y, p);
@@ -208,8 +208,10 @@ public class RosterFileProcessor {
 			dob = new DOB(day, month, year);
 			dobRepository.save(dob);
 		}
-		p.bornOn = dob;
+		p.bornOn(dob);
 
+		logger.info(attrs.get(ARM));
+		
 		// bowling style
 		Handedness arm = null;
 		if (LEFT.equals(attrs.get(ARM))) {
@@ -318,8 +320,10 @@ public class RosterFileProcessor {
 		return playerAttribtues;
 	}
 
-	private Map<String, String> addBowlingDetails(Map<String, String> attrMap,
-			String bowlDesc) {
+	private Map<String, String> addBowlingDetails(Map<String, String> attrMap, String bowlDesc) {
+		
+		logger.info("Arm is "+attrMap.get(ARM));
+		
 		if (bowlDesc.contains("left")) {
 			attrMap.put(ARM, LEFT);
 		}
@@ -327,8 +331,8 @@ public class RosterFileProcessor {
 			attrMap.put(ARM, RIGHT);
 		}
 		else {
-			// TOOD log me
-			System.out.println("Can't derive bowling arm from " + bowlDesc);
+			logger.info("Can't find bowling arm from "+bowlDesc+" deriving from batting handedness "+attrMap.get(HANDED));
+			attrMap.put(ARM, attrMap.get(HANDED));
 		}
 		String variety = null;
 		String pace = null;

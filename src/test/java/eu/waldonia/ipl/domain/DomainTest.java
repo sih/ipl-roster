@@ -76,9 +76,9 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	Player db = playerRepository.findOne(bravo.id());
     	
     	// test basic
-    	assertEquals("Dwayne Bravo", db.name);
+    	assertEquals("Dwayne Bravo", db.name());
     	// test relationship
-    	Bowls bowls = db.bowls;
+    	Bowls bowls = db.bowls();
     	assertNotNull(bowls);
     	assertEquals("Medium-Fast",bowls.pace);
     	assertNull(bowls.variety);
@@ -100,8 +100,8 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	Franchise dbFranchise = franchiseRepository.findOne(csk.id);
     	
     	
-    	assertEquals("Dwayne Bravo", dbPlayer.name);
-    	Set<Signs> contracts = dbPlayer.signs;
+    	assertEquals("Dwayne Bravo", dbPlayer.name());
+    	Set<Signs> contracts = dbPlayer.signs();
     	assertEquals(1, contracts.size());
     	Signs s = contracts.iterator().next();
     	
@@ -172,7 +172,7 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	p = playerRepository.findPlayerByName("IVA Richards");
     	assertNull(p);
     	Player kv = new Player();
-    	kv.name = "IVA Richards";
+    	kv.name("IVA Richards");
     	playerRepository.save(kv);
     	p = playerRepository.findPlayerByName("IVA Richards");
     	assertNotNull(p);
@@ -187,19 +187,19 @@ public class DomainTest extends WrappingServerIntegrationTest {
     public void shouldFindPlayersByNameMulti() {
     	Player p = null;
     	Player kv = new Player();
-    	kv.name = "IVA Richards";
+    	kv.name("IVA Richards");
     	playerRepository.save(kv);
     	p = playerRepository.findPlayerByName("IVA Richards");
     	assertNotNull(p);
-    	assertEquals("IVA Richards", p.name);
+    	assertEquals("IVA Richards", p.name());
     	// multi
     	Player mh = new Player();
-    	mh.name = "Michael Holding";
+    	mh.name("Michael Holding");
     	playerRepository.save(mh);
     	try {
         	p = playerRepository.findPlayerByName("IVA Richards");
         	assertNotNull(p);
-        	assertEquals("IVA Richards", p.name);
+        	assertEquals("IVA Richards", p.name());
     	}
     	catch (Exception e) {
     		fail("Shouldn't have thrown an exception "+e.getMessage());
@@ -210,7 +210,7 @@ public class DomainTest extends WrappingServerIntegrationTest {
     @Test
     public void shouldSupportBowlsRelationship() {
     	Player p = new Player();
-    	p.name = "Michael Holding";
+    	p.name("Michael Holding");
     	Handedness rightArm = new Right();
     	String pace = Bowls.FAST;
     	String variety = null;
@@ -220,7 +220,7 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	
     	Player dbp = playerRepository.findPlayerByName("Michael Holding");
     	assertNotNull(dbp);
-    	Bowls b = dbp.bowls;
+    	Bowls b = dbp.bowls();
     	assertNull(b.variety);
 		assertEquals(Bowls.FAST, b.pace);
 		assertTrue(b.arm() instanceof Right);
@@ -229,7 +229,7 @@ public class DomainTest extends WrappingServerIntegrationTest {
     @Test
     public void shouldSupportBatsAndBowlsRelationship() {
     	Player p = new Player();
-    	p.name = "Michael Holding";
+    	p.name("Michael Holding");
     	Handedness rightArm = new Right();
     	String pace = Bowls.FAST;
     	String variety = null;
@@ -242,7 +242,7 @@ public class DomainTest extends WrappingServerIntegrationTest {
     	
     	Player dbp = playerRepository.findPlayerByName("Michael Holding");
     	assertNotNull(dbp);
-    	Bowls b = dbp.bowls;
+    	Bowls b = dbp.bowls();
     	assertNull(b.variety);
 		assertEquals(Bowls.FAST, b.pace);
 		assertTrue(b.arm() instanceof Right);    	
@@ -251,7 +251,7 @@ public class DomainTest extends WrappingServerIntegrationTest {
     @Test
     public void shouldSupportRepresentingCountry() {
     	Player p = new Player();
-    	p.name = "Michael Holding";
+    	p.name("Michael Holding");
     	Handedness rightArm = new Right();
     	String pace = Bowls.FAST;
     	String variety = null;

@@ -75,9 +75,9 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 			
 			assertNotNull(p);
 			assertTrue(p instanceof Batter);
-			Handedness h = p.bats;
+			Handedness h = p.bats();
 			assertTrue(h instanceof Left);
-			assertEquals("Suresh Raina", p.name);
+			assertEquals("Suresh Raina", p.name());
 			
 			// country
 			
@@ -86,7 +86,7 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 			assertEquals(india, p.country());
 			
 			DOB dbDOB = dobRepository.getBirthday(27, 11, 1986);
-			assertEquals(dbDOB, p.bornOn);
+			assertEquals(dbDOB, p.bornOn());
 			
 			Franchise csk = franchiseRepository.findByCode("CSK");
 			Year y2015 = yearRepository.findYearByYear(2015);
@@ -104,13 +104,13 @@ public class RosterFileProcessorIntegrationTest extends WrappingServerIntegratio
 			
 			// check the contract from the franchise pov
 			Contract fContract = (Contract)csk.contracts.stream()
-			.filter(s -> s.franchise().equals(csk) && s.player().name.equals("Suresh Raina"))
+			.filter(s -> s.franchise().equals(csk) && s.player().name().equals("Suresh Raina"))
 			.toArray()[0];
 			
 			assertEquals(contract, fContract);
 			
 			// check bowl style
-			Bowls b = p.bowls;
+			Bowls b = p.bowls();
 			assertNotNull(b);
 			assertEquals(Bowls.OFF_BREAK, b.variety);
 			assertEquals(Bowls.SLOW, b.pace);
