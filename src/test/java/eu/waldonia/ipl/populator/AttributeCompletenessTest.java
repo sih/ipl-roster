@@ -74,7 +74,7 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
     	
     }
     
-    // @Test
+    @Test
     public void shouldHaveBowlingPaceKXIP() {
     	// run in the file
     	try {
@@ -99,7 +99,7 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
 		}    	
     }
     
-    // @Test
+    @Test
     public void shouldAllHaveBowlingPace() {
     	// run in the file
     	try {

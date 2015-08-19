@@ -209,16 +209,15 @@ public class RosterFileProcessor {
 			dobRepository.save(dob);
 		}
 		p.bornOn(dob);
-
-		logger.info(attrs.get(ARM));
 		
 		// bowling style
 		Handedness arm = null;
-		if (LEFT.equals(attrs.get(ARM))) {
-			arm = new Left();
-		}
-		else if (RIGHT.equals(attrs.get(ARM))) {
+		if (attrs.get(ARM).startsWith(RIGHT)) {
 			arm = new Right();
+
+		}
+		else if (attrs.get(ARM).startsWith(LEFT)) {
+			arm = new Left();
 		}
 
 		String pace = attrs.get(BOWL_PACE);
