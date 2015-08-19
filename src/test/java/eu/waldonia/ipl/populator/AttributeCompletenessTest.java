@@ -75,32 +75,7 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
     }
     
     @Test
-    public void shouldHaveBowlingPaceKXIP() {
-    	// run in the file
-    	try {
-			Map<String, String> linesInError = rfp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster/kxip.txt"));
-			
-			assertTrue(linesInError.isEmpty());
-			Iterable<Player> playaz = playerRepository.findAll();
-			
-			for (Player player : playaz) {
-				logger.info("Processing "+player.name());
-				if (player instanceof Bowler) {
-					Bowls bowls = player.bowls();
-					assertNotNull(bowls);
-					assertNotNull(bowls.pace);
-				}
-			}
-			
-		} 
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}    	
-    }
-    
-    @Test
-    public void shouldAllHaveBowlingPace() {
+    public void shouldAllHaveRelevantAttributes() {
     	// run in the file
     	try {
 			Map<String, Map<String, String>> filesInError = rsp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster"));
@@ -108,17 +83,15 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
 			for (Map<String,String> errors : filesInError.values()) {
 				assertTrue(errors.isEmpty());
 			}
-			
-			
+		
 			Iterable<Player> playaz = playerRepository.findAll();
-			
-			
 			for (Player player : playaz) {
 				logger.info("Processing "+player.name());
+				
+				assertTrue(validateBattingHand(player));
+				
 				if (player instanceof Bowler) {
-					Bowls bowls = player.bowls();
-					assertNotNull(bowls);
-					assertNotNull(bowls.pace);
+					assertTrue(validateBowlingDetails(player));
 				}
 			}
 			
@@ -129,4 +102,21 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
 		}
     				
     }
+
+    /*
+     * Check that bowling details are valid
+     */
+    private boolean validateBowlingDetails(final Player player) {
+    	Bowls bowls = player.bowls();
+    	return (bowls != null && bowls.pace != null);
+    }
+    
+    /*
+     * Check they are either right or left handed
+     */
+    private boolean validateBattingHand(final Player player) {
+    	Handedness hand = player.bats();
+    	return (hand != null && (hand instanceof Left || hand instanceof Right));
+    }
+
 }
