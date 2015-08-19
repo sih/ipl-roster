@@ -89,6 +89,7 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
 				logger.info("Processing "+player.name());
 				
 				assertTrue(validateBattingHand(player));
+				assertTrue(validateDOB(player));
 				
 				if (player instanceof Bowler) {
 					assertTrue(validateBowlingDetails(player));
@@ -117,6 +118,11 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
     private boolean validateBattingHand(final Player player) {
     	Handedness hand = player.bats();
     	return (hand != null && (hand instanceof Left || hand instanceof Right));
+    }
+    
+    private boolean validateDOB(final Player player) {
+    	DOB dob = player.bornOn();
+    	return (dob != null && dob.day >=1 && dob.day <= 31 && dob.month >= 1 && dob.month <=13 && dob.year >= 1966 && dob.year <= 2000);
     }
 
 }
