@@ -3,7 +3,7 @@ package eu.waldonia.ipl.populator;
 import static org.junit.Assert.*;
 
 import java.net.*;
-import java.util.Map;
+import java.util.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -90,7 +90,7 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
 				
 				assertTrue(validateBattingHand(player));
 				assertTrue(validateDOB(player));
-				
+				assertTrue(validateContract(player));
 				if (player instanceof Bowler) {
 					assertTrue(validateBowlingDetails(player));
 				}
@@ -120,9 +120,35 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
     	return (hand != null && (hand instanceof Left || hand instanceof Right));
     }
     
+    /*
+     * Check they have a valid date of birth
+     */
     private boolean validateDOB(final Player player) {
     	DOB dob = player.bornOn();
     	return (dob != null && dob.day >=1 && dob.day <= 31 && dob.month >= 1 && dob.month <=13 && dob.year >= 1966 && dob.year <= 2000);
     }
+    
+    /*
+     * Check they have a contract and its valid
+     */
+    private boolean validateContract(final Player player) {
+    	List<Contract> contracts = player.contracts();
+    	boolean valid = false;
+    	
+    	valid = (contracts != null);
+    	
+    	Iterator<Contract> cList = contracts.iterator();
+    	while (valid && cList.hasNext()) {
+    		Contract c = cList.next();
+    		valid = (c != null);
+    		if (valid) {
+    			valid = (c.franchise() != null);	// must have another side 
+    		}
+    	}
+    	
+    	return valid;
+    }
+    
+    
 
 }
