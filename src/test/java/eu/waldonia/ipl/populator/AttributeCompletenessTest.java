@@ -91,6 +91,7 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
 				assertTrue(validateBattingHand(player));
 				assertTrue(validateDOB(player));
 				assertTrue(validateContract(player));
+				assertTrue(validatePlayerTypes(player));
 				if (player instanceof Bowler) {
 					assertTrue(validateBowlingDetails(player));
 				}
@@ -146,6 +147,17 @@ public class AttributeCompletenessTest extends WrappingServerIntegrationTest {
     		}
     	}
     	
+    	return valid;
+    }
+    
+    private boolean validatePlayerTypes(final Player player) {
+    	boolean valid = false;
+    	if (player != null) {
+    		valid = (player instanceof Bowler || player instanceof Batter || player instanceof WicketKeeper || player instanceof AllRounder);
+    	}
+    	
+    	if (!valid) logger.info("Failed for player "+player.name());
+    		
     	return valid;
     }
     

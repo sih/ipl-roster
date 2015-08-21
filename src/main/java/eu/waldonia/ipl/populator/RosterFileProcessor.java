@@ -321,8 +321,6 @@ public class RosterFileProcessor {
 
 	private Map<String, String> addBowlingDetails(Map<String, String> attrMap, String bowlDesc) {
 		
-		logger.info("Arm is "+attrMap.get(ARM));
-		
 		if (bowlDesc.contains("left")) {
 			attrMap.put(ARM, LEFT);
 		}
