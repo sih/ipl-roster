@@ -18,19 +18,19 @@ public class Player {
 	}
 
 	@GraphId private Long id;
-	public String name;
+	private String name;
 	
 	@Relationship(type="SIGNED", direction = Relationship.OUTGOING)
-	Set<Signs> signs;
+	private Set<Signs> signs;
 	
 	@Relationship(type="BORN", direction = Relationship.OUTGOING)
-	public DOB bornOn;
+	private DOB bornOn;
 	
 	@Relationship(type="BATS", direction = Relationship.OUTGOING)
-	public Handedness bats;
+	private Handedness bats;
 
 	@Relationship(type="BOWLS", direction = Relationship.OUTGOING)
-	public Bowls bowls;
+	private Bowls bowls;
 
 	@Relationship(type="REPRESENTS", direction = Relationship.OUTGOING)
 	private Country country;
@@ -78,6 +78,31 @@ public class Player {
 
 	public Long id() {
 		return id;
+	}
+	
+	
+	public Bowls bowls() {
+		return bowls;
+	}
+	
+	public String name() {
+		return name;
+	}
+	
+	public void name(final String name) {
+		this.name = name;
+	}
+	
+	public DOB bornOn() {
+		return this.bornOn;
+	}
+	
+	public void bornOn(final DOB bornOn) {
+		this.bornOn = bornOn;
+	}
+	
+	public Handedness bats() {
+		return this.bats;
 	}
 	
 }

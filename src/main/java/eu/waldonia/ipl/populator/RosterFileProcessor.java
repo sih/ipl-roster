@@ -157,7 +157,7 @@ public class RosterFileProcessor {
 
 		Player p = playerAttrs.keySet().iterator().next();
 		Map<String, String> attrs = playerAttrs.get(p);
-		p.name = attrs.get(NAME);
+		p.name(attrs.get(NAME));
 
 		// contract
 		Contract c = new Contract(y, p);
@@ -208,15 +208,16 @@ public class RosterFileProcessor {
 			dob = new DOB(day, month, year);
 			dobRepository.save(dob);
 		}
-		p.bornOn = dob;
-
+		p.bornOn(dob);
+		
 		// bowling style
 		Handedness arm = null;
-		if (LEFT.equals(attrs.get(ARM))) {
-			arm = new Left();
-		}
-		else if (RIGHT.equals(attrs.get(ARM))) {
+		if (attrs.get(ARM).startsWith(RIGHT)) {
 			arm = new Right();
+
+		}
+		else if (attrs.get(ARM).startsWith(LEFT)) {
+			arm = new Left();
 		}
 
 		String pace = attrs.get(BOWL_PACE);
@@ -318,8 +319,8 @@ public class RosterFileProcessor {
 		return playerAttribtues;
 	}
 
-	private Map<String, String> addBowlingDetails(Map<String, String> attrMap,
-			String bowlDesc) {
+	private Map<String, String> addBowlingDetails(Map<String, String> attrMap, String bowlDesc) {
+		
 		if (bowlDesc.contains("left")) {
 			attrMap.put(ARM, LEFT);
 		}
@@ -327,8 +328,8 @@ public class RosterFileProcessor {
 			attrMap.put(ARM, RIGHT);
 		}
 		else {
-			// TOOD log me
-			System.out.println("Can't derive bowling arm from " + bowlDesc);
+			logger.info("Can't find bowling arm from "+bowlDesc+" deriving from batting handedness "+attrMap.get(HANDED));
+			attrMap.put(ARM, attrMap.get(HANDED));
 		}
 		String variety = null;
 		String pace = null;
@@ -349,26 +350,28 @@ public class RosterFileProcessor {
 			variety = Bowls.ORTHODOX;
 		}
 		// pace
-		if (bowlDesc.contains("slow")) {
-			pace = Bowls.SLOW;
-		}
-		else if (bowlDesc.contains("medium-fast")) {
-			pace = Bowls.MEDIUM_FAST;
-		}
-		else if (bowlDesc.contains("medium fast")) {
-			pace = Bowls.MEDIUM_FAST;
-		}
-		else if (bowlDesc.contains("fast-medium")) {
-			pace = Bowls.FAST_MEDIUM;
-		}
-		else if (bowlDesc.contains("fast medium")) {
-			pace = Bowls.FAST_MEDIUM;
-		}
-		else if (bowlDesc.contains("medium")) {
-			pace = Bowls.MEDIUM;
-		}
-		else if (bowlDesc.contains("fast")) {
-			pace = Bowls.FAST;
+		if (null == pace) {
+			if (bowlDesc.contains("slow")) {
+				pace = Bowls.SLOW;
+			}
+			else if (bowlDesc.contains("medium-fast")) {
+				pace = Bowls.MEDIUM_FAST;
+			}
+			else if (bowlDesc.contains("medium fast")) {
+				pace = Bowls.MEDIUM_FAST;
+			}
+			else if (bowlDesc.contains("fast-medium")) {
+				pace = Bowls.FAST_MEDIUM;
+			}
+			else if (bowlDesc.contains("fast medium")) {
+				pace = Bowls.FAST_MEDIUM;
+			}
+			else if (bowlDesc.contains("medium")) {
+				pace = Bowls.MEDIUM;
+			}
+			else if (bowlDesc.contains("fast")) {
+				pace = Bowls.FAST;
+			}
 		}
 
 		if (null == pace) {
