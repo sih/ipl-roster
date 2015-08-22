@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans 
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<context:annotation-config/>
+	<context:component-scan base-package="eu.waldonia.ipl, org.neo4j.ogm"/>
+
+	<!-- Map out neo4j beans in order to add aspects -->
+
+	<bean id="metaData" class="org.neo4j.ogm.metadata.MetaData">
+		<constructor-arg value="eu.waldonia.ipl.domain" />
+	</bean>
+	<bean id="sessionFactory" class="org.neo4j.ogm.session.SessionFactory">
+		<constructor-arg value="eu.waldonia.ipl.domain" />
+	</bean>
+	<bean id="mappingContext" class="org.neo4j.ogm.mapper.MappingContext">
+		<constructor-arg ref="metaData" />
+	</bean>
 
 
-	<context:component-scan base-package="eu.waldonia.ipl" />
+	<bean id="entityGraphMapper" class="org.neo4j.ogm.mapper.EntityGraphMapper">
+		<constructor-arg ref="metaData" />
+		<constructor-arg ref="mappingContext" />
+	</bean>
 
 </beans>

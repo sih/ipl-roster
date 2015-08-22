@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import eu.waldonia.ipl.PersistenceContext;
 import eu.waldonia.ipl.repository.PlayerRepository;
 
-@ContextConfiguration(classes = {PersistenceContext.class})
+@ContextConfiguration({"classpath:application-context.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TransactionTest extends WrappingServerIntegrationTest {

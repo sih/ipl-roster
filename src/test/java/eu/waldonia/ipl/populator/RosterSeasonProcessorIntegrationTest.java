@@ -18,7 +18,7 @@ import eu.waldonia.ipl.PersistenceContext;
 import eu.waldonia.ipl.domain.*;
 import eu.waldonia.ipl.repository.*;
 
-@ContextConfiguration(classes = {PersistenceContext.class})
+@ContextConfiguration({"classpath:application-context.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class RosterSeasonProcessorIntegrationTest extends WrappingServerIntegrationTest {

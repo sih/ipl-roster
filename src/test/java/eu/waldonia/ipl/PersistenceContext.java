@@ -11,11 +11,10 @@ import org.springframework.data.neo4j.server.RemoteServer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@Configuration
 @EnableNeo4jRepositories("eu.waldonia.ipl.repository")
-@ComponentScan("eu.waldonia.ipl")
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
-@ContextConfiguration(value="application-context.xml")
 public class PersistenceContext extends Neo4jConfiguration {
 
     public static final int NEO4J_PORT = 7479;
