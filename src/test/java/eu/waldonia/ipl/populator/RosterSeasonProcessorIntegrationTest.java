@@ -14,6 +14,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ch.qos.logback.classic.Logger;
 import eu.waldonia.ipl.PersistenceContext;
 import eu.waldonia.ipl.domain.*;
 import eu.waldonia.ipl.repository.*;
@@ -41,6 +42,9 @@ public class RosterSeasonProcessorIntegrationTest extends WrappingServerIntegrat
 			Map<String,Map<String,String>> filesInError = rfp.process(new URI("file:///Users/sid/dev/ipl-roster/src/test/resources/2015/roster"));
 
 			for (Map<String,String> fileReport : filesInError.values()) {
+				if (!fileReport.isEmpty()) {
+					System.out.println(fileReport);
+				}
 				assertTrue(fileReport.isEmpty());				
 			}
 

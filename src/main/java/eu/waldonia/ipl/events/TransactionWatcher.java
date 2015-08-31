@@ -57,7 +57,13 @@ public class TransactionWatcher {
 
 		// grab the id of the object to be saved
 		Long id = null;
-		Field idField = itemToBeSaved.getClass().getDeclaredField("id");
+		Field idField = null;
+		try {
+			idField = itemToBeSaved.getClass().getDeclaredField("id");
+		} 
+		catch (NoSuchFieldException e) {
+			idField = itemToBeSaved.getClass().getSuperclass().getDeclaredField("id");
+		}
 		if (idField != null) {
 			idField.setAccessible(true);
 			id = (Long)(idField.get(itemToBeSaved));
